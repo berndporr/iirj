@@ -43,7 +43,7 @@ package uk.me.berndporr.iirj;
  */
 public abstract class DirectFormAbstract {
 
-    public void DirectFormAbstract () {
+    public DirectFormAbstract () {
         reset();
     }
 

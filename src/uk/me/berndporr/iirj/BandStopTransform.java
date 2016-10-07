@@ -81,17 +81,6 @@ public class BandStopTransform {
             ComplexPair p = transform(pair.poles.first);
             ComplexPair z = transform(pair.zeros.first);
 
-            // Do the full calculation to verify correctness
-            ComplexPair pc = transform(analog.getPair(i).poles.second);
-            ComplexPair zc = transform(analog.getPair(i).zeros.second);
-
-            // get the conjugates into pc and zc
-            if (zc.first.equals(z.first)) {
-                Complex tmp = zc.first;
-                zc.first = zc.second;
-                zc.second = tmp;
-            }
-
             digital.addPoleZeroConjugatePairs(p.first, z.first);
             digital.addPoleZeroConjugatePairs(p.second, z.second);
         }
