@@ -3,26 +3,35 @@ An IIR filter library written in JAVA.
 
 It's based on the IIR1 library by Vinnie Falco and myself.
 
-You need the Apache Commons Math libraries:
+## Dependencies
+You need the Apache Commons Math libraries from here:
 
 http://commons.apache.org/proper/commons-math/index.html
 
-Usage (lowPass,highPass,bandpass and bandstop are supported just now):
+## Usage
 
-Init:
+### Init
 
 Butterworth butterworth = new Butterworth();
 
-butterworth.bandStop(2,250,50,5);
+### Bandstop
+butterworth.bandStop(order,Samplingfreq,Center freq,Width in frequ);
 
-Then filter with sample by sample:
+### Bandpass
+butterworth.bandPass(order,Samplingfreq,Center freq,Width in frequ);
+
+### Lowpass
+butterworth.lowPass(order,Samplingfreq,Cutoff frequ);
+
+### Highpass
+butterworth.highPass(order,Samplingfreq,Cutoff frequ);
+
+### Filtering
+sample by sample for realtime processing:
 
 v = butterworth.filter(v)
 
-See also test.java for a complete example.
-
-This is work in progress and I'll be adding more transforms and
-filters.
+See also Test.java for a complete example.
 
 Have fun
 
