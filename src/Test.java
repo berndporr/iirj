@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import uk.me.berndporr.iirj.Butterworth;
 
 
-// impulse response of a lowpass filter
+// Various impulse responses written out to files so that you can plot them
 public class Test {
 
 	static void bandPassTest() {
