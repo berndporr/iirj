@@ -117,7 +117,7 @@ public class Butterworth extends Cascade {
       AnalogLowPass m_analogProto = new AnalogLowPass(order);
       m_analogProto.design(order);
 
-      LayoutBase m_digitalProto = new LayoutBase(order);
+      LayoutBase m_digitalProto = new LayoutBase(order*2);
 
       new BandStopTransform(centerFrequency / sampleRate,
               widthFrequency / sampleRate,

@@ -76,11 +76,10 @@ public class BandStopTransform {
 
         int numPoles = analog.getNumPoles();
         int pairs = numPoles / 2;
-        for (int i = 0; i < pairs; ++i) {
+        for (int i = 0; i < pairs; i++) {
             PoleZeroPair pair = analog.getPair(i);
             ComplexPair p = transform(pair.poles.first);
             ComplexPair z = transform(pair.zeros.first);
-
             digital.addPoleZeroConjugatePairs(p.first, z.first);
             digital.addPoleZeroConjugatePairs(p.second, z.second);
         }
