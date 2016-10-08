@@ -40,12 +40,10 @@ import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexUtils;
 
 /**
- * 
- * @author Bernd Porr
- * 
- *         The main class to implement Butterworth filters. In order to create a
- *         Butterworth filter first create an instance: Butterworth butterworth
- *         = new Butterworth(); Then call one of the methods below to create
+ *         User facing class which contains all the methods the user uses
+ *         to create Butterworth filters. This done in this way:
+ *         Butterworth butterworth = new Butterworth(); 
+ *         Then call one of the methods below to create
  *         low-,high-,band-, or stopband filters. For example:
  *         butterworth.bandPass(2,250,50,5);
  */

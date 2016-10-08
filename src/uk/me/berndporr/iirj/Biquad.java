@@ -40,7 +40,7 @@ import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexUtils;
 
 /**
- * Created by bp1 on 03/10/16.
+ * Contains the coefficients of a 2nd order digital filter with two poles and two zeros
  */
 public class Biquad {
 

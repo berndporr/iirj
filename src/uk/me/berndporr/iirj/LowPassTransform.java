@@ -35,6 +35,9 @@ import org.apache.commons.math3.complex.Complex;
  * SOFTWARE.
  *******************************************************************************/
 
+/**
+ * Transforms from an analogue lowpass filter to a digital lowpass filter
+ */
 public class LowPassTransform {
 
 	double f;

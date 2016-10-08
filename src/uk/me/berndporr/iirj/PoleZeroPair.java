@@ -38,6 +38,11 @@ package uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
+/**
+ * 
+ * It's written on the tin.
+ *
+ */
 public class PoleZeroPair {
 
 	ComplexPair poles;

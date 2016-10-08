@@ -35,6 +35,12 @@ package uk.me.berndporr.iirj;
 
  *******************************************************************************/
 
+/**
+ * 
+ * Implementation of a Direct Form I filter with its states. The coefficients
+ * are supplied from the outside.
+ *
+ */
 public class DirectFormI extends DirectFormAbstract {
 
     public DirectFormI() {

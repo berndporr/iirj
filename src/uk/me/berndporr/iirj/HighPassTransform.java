@@ -38,6 +38,9 @@ package uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
+/**
+ * Transforms from an analogue lowpass filter to a digital highpass filter
+ */
 public class HighPassTransform {
 
 	double f;

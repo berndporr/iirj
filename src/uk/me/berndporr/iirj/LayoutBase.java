@@ -38,6 +38,12 @@ package uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
+/**
+ * 
+ * Digital/analogue filter coefficient storage space organising the
+ * storage as PoleZeroPairs so that we have as always a 2nd order filter
+ *
+ */
 public class LayoutBase {
 
 	private int m_numPoles;

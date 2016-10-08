@@ -40,7 +40,7 @@ import org.apache.commons.math3.complex.Complex;
 
 /**
  * 
- * @author Bernd Porr
+ * A complex pair
  *
  */
 public class ComplexPair {

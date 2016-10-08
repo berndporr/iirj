@@ -38,7 +38,7 @@ package uk.me.berndporr.iirj;
 import org.apache.commons.math3.complex.Complex;
 
 /**
- * Created by bp1 on 05/10/16.
+ * Transforms from an analogue lowpass filter to a digital bandstop filter
  */
 public class BandStopTransform {
 

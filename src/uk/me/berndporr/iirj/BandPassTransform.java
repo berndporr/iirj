@@ -2,6 +2,9 @@ package uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
+/**
+ * Transforms from an analogue bandpass filter to a digital bandstop filter
+ */
 public class BandPassTransform {
 
 	double wc2;

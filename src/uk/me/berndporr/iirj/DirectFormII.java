@@ -35,6 +35,13 @@ package uk.me.berndporr.iirj;
 
  *******************************************************************************/
 
+/**
+ * 
+ * Implementation of a Direct Form II filter with its states. The coefficients
+ * are supplied from the outside.
+ *
+ */
+
 public class DirectFormII extends DirectFormAbstract {
 
     public DirectFormII() {

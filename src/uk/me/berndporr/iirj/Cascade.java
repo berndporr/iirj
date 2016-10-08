@@ -41,7 +41,9 @@ import org.apache.commons.math3.complex.ComplexUtils;
 
 /**
  * 
- * @author Bernd Porr
+ * The mother of all filters. It contains the coefficients of all
+ * filter stages as a sequence of 2nd order filters and the states
+ * of the 2nd order filters which also imply if it's direct form I or II
  *
  */
 public class Cascade {

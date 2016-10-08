@@ -38,6 +38,11 @@ package uk.me.berndporr.iirj;
 
 import org.apache.commons.math3.complex.Complex;
 
+/**
+ * 
+ * Useful math functions which come back over and over again
+ *
+ */
 public class MathSupplement {
 
 	static Complex solve_quadratic_1(double a, double b, double c) {
