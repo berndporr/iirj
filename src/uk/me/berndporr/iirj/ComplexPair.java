@@ -39,7 +39,9 @@ package uk.me.berndporr.iirj;
 import org.apache.commons.math3.complex.Complex;
 
 /**
- * Created by bp1 on 03/10/16.
+ * 
+ * @author Bernd Porr
+ *
  */
 public class ComplexPair {
 

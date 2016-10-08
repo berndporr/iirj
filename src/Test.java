@@ -6,7 +6,7 @@ public class Test {
 
 	public static void main(String args[]) {
 		Butterworth butterworth = new Butterworth();
-		butterworth.bandStop(2,250,50,5);
+		butterworth.bandPass(2,250,50,5);
 
 		// let's do an impulse response
 		for(int i=0;i<500;i++) {

@@ -1,4 +1,5 @@
 package uk.me.berndporr.iirj;
+
 /*******************************************************************************
 
  "A Collection of Useful C++ Classes for Digital Signal Processing"
@@ -35,32 +36,31 @@ package uk.me.berndporr.iirj;
 
  *******************************************************************************/
 
-
 import org.apache.commons.math3.complex.Complex;
 
 public class PoleZeroPair {
 
-  ComplexPair poles;
-  ComplexPair zeros;
+	ComplexPair poles;
+	ComplexPair zeros;
 
-  // single pole/zero
-  PoleZeroPair (Complex p, Complex z) {
-      poles = new ComplexPair(p);
-      zeros = new ComplexPair(z);
-  }
+	// single pole/zero
+	PoleZeroPair(Complex p, Complex z) {
+		poles = new ComplexPair(p);
+		zeros = new ComplexPair(z);
+	}
 
-  // pole/zero pair
-  PoleZeroPair (Complex p1, Complex z1,
-                Complex p2, Complex z2) {
-      poles = new ComplexPair(p1, p2);
-      zeros = new ComplexPair(z1, z2);
-  }
+	// pole/zero pair
+	PoleZeroPair(Complex p1, Complex z1, Complex p2, Complex z2) {
+		poles = new ComplexPair(p1, p2);
+		zeros = new ComplexPair(z1, z2);
+	}
 
-  boolean isSinglePole () {
-    return poles.second.equals(new Complex(0,0)) && zeros.second.equals(new Complex(0,0));
-  }
+	boolean isSinglePole() {
+		return poles.second.equals(new Complex(0, 0))
+				&& zeros.second.equals(new Complex(0, 0));
+	}
 
-  boolean is_nan () {
-    return poles.is_nan() || zeros.is_nan();
-  }
+	boolean is_nan() {
+		return poles.is_nan() || zeros.is_nan();
+	}
 };

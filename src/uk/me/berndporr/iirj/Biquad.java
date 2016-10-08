@@ -51,12 +51,6 @@ public class Biquad {
     double m_b2;
     double m_b0;
 
-    DirectFormAbstract directFormAbstract = new DirectFormI();
-
-    double filter(double in, Biquad b) {
-        return directFormAbstract.process1(in, b);
-    }
-
     double getA0() {
         return m_a0;
     }
@@ -81,11 +75,6 @@ public class Biquad {
         return m_b2 * m_a0;
     }
 
-
-    Complex addmul(Complex c, double v, Complex c1) {
-        return new Complex(c.getReal() + v * c1.getReal(), c.getImaginary() + v * c1.getImaginary());
-    }
-
     Complex response(double normalizedFrequency) {
         double a0 = getA0();
         double a1 = getA1();
@@ -102,10 +91,10 @@ public class Biquad {
 
         Complex ct = new Complex(b0 / a0);
         Complex cb = new Complex(1);
-        ct = addmul(ct, b1 / a0, czn1);
-        ct = addmul(ct, b2 / a0, czn2);
-        cb = addmul(cb, a1 / a0, czn1);
-        cb = addmul(cb, a2 / a0, czn2);
+        ct = MathSupplement.addmul(ct, b1 / a0, czn1);
+        ct = MathSupplement.addmul(ct, b2 / a0, czn2);
+        cb = MathSupplement.addmul(cb, a1 / a0, czn1);
+        cb = MathSupplement.addmul(cb, a2 / a0, czn2);
         ch = ch.multiply(ct);
         cbot = cbot.multiply(cb);
 

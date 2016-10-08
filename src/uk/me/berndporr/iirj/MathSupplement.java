@@ -1,4 +1,5 @@
 package uk.me.berndporr.iirj;
+
 /*******************************************************************************
 
  "A Collection of Useful C++ Classes for Digital Signal Processing"
@@ -35,47 +36,44 @@ package uk.me.berndporr.iirj;
 
  *******************************************************************************/
 
-
 import org.apache.commons.math3.complex.Complex;
-
 
 public class MathSupplement {
 
-    static Complex solve_quadratic_1(double a, double b, double c) {
-        return (new Complex(-b).add(new Complex(b * b - 4 * a * c, 0)).sqrt()).divide(2. * a);
-    }
+	static Complex solve_quadratic_1(double a, double b, double c) {
+		return (new Complex(-b).add(new Complex(b * b - 4 * a * c, 0)).sqrt())
+				.divide(2. * a);
+	}
 
-    static Complex solve_quadratic_2(double a, double b, double c) {
-        return (new Complex(-b).subtract(new Complex(b * b - 4 * a * c, 0)).sqrt()).divide(2. * a);
-    }
+	static Complex solve_quadratic_2(double a, double b, double c) {
+		return (new Complex(-b).subtract(new Complex(b * b - 4 * a * c, 0))
+				.sqrt()).divide(2. * a);
+	}
 
-    static Complex adjust_imag(Complex c) {
-        if (Math.abs(c.getImaginary()) < 1e-30)
-            return new Complex(c.getReal(), 0);
-        else
-            return c;
-    }
+	static Complex adjust_imag(Complex c) {
+		if (Math.abs(c.getImaginary()) < 1e-30)
+			return new Complex(c.getReal(), 0);
+		else
+			return c;
+	}
 
-    static Complex addmul(Complex c, double v, Complex c1) {
-        return new Complex(c.getReal() + v * c1.getReal(), c.getImaginary() + v * c1.getImaginary());
-    }
+	static Complex addmul(Complex c, double v, Complex c1) {
+		return new Complex(c.getReal() + v * c1.getReal(), c.getImaginary() + v
+				* c1.getImaginary());
+	}
 
+	static Complex recip(Complex c) {
+		double n = 1.0 / (c.abs() * c.abs());
 
-    static Complex recip(Complex c) {
-        double n = 1.0 / (c.abs() * c.abs());
+		return new Complex(n * c.getReal(), n * c.getImaginary());
+	}
 
-        return new Complex(n * c.getReal(), n * c.getImaginary());
-    }
+	static double asinh(double x) {
+		return Math.log(x + Math.sqrt(x * x + 1));
+	}
 
-
-    static double asinh(double x) {
-        return Math.log(x + Math.sqrt(x * x + 1));
-    }
-
-
-    static double acosh(double x) {
-        return Math.log(x + Math.sqrt(x * x - 1));
-    }
-
+	static double acosh(double x) {
+		return Math.log(x + Math.sqrt(x * x - 1));
+	}
 
 }

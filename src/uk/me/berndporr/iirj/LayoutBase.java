@@ -1,4 +1,5 @@
 package uk.me.berndporr.iirj;
+
 /*******************************************************************************
 
  "A Collection of Useful C++ Classes for Digital Signal Processing"
@@ -35,66 +36,64 @@ package uk.me.berndporr.iirj;
 
  *******************************************************************************/
 
-
 import org.apache.commons.math3.complex.Complex;
 
 public class LayoutBase {
 
-    private int m_numPoles;
-    private PoleZeroPair[] m_pair;
-    private double m_normalW;
-    private double m_normalGain;
+	private int m_numPoles;
+	private PoleZeroPair[] m_pair;
+	private double m_normalW;
+	private double m_normalGain;
 
-    LayoutBase(PoleZeroPair[] pairs) {
-        m_numPoles = pairs.length*2;
-        m_pair = pairs;
-    }
+	LayoutBase(PoleZeroPair[] pairs) {
+		m_numPoles = pairs.length * 2;
+		m_pair = pairs;
+	}
 
-    LayoutBase(int numPoles) {
-        m_numPoles = numPoles;
-        m_pair = new PoleZeroPair[numPoles/2];
-    }
+	LayoutBase(int numPoles) {
+		m_numPoles = numPoles;
+		m_pair = new PoleZeroPair[numPoles / 2];
+	}
 
-    void reset() {
-        m_numPoles = 0;
-    }
+	void reset() {
+		m_numPoles = 0;
+	}
 
-    int getNumPoles() {
-        return m_numPoles;
-    }
+	int getNumPoles() {
+		return m_numPoles;
+	}
 
-    void add(Complex pole, Complex zero) {
-        m_pair[m_numPoles / 2] = new PoleZeroPair(pole, zero);
-        ++m_numPoles;
-    }
+	void add(Complex pole, Complex zero) {
+		m_pair[m_numPoles / 2] = new PoleZeroPair(pole, zero);
+		++m_numPoles;
+	}
 
-    void addPoleZeroConjugatePairs(Complex pole,
-                                   Complex zero) {
-        m_pair[m_numPoles / 2] = new PoleZeroPair(
-                pole, zero, pole.conjugate(), zero.conjugate());
-        m_numPoles += 2;
-    }
+	void addPoleZeroConjugatePairs(Complex pole, Complex zero) {
+		m_pair[m_numPoles / 2] = new PoleZeroPair(pole, zero, pole.conjugate(),
+				zero.conjugate());
+		m_numPoles += 2;
+	}
 
-    void add(ComplexPair poles, ComplexPair zeros) {
-        m_pair[m_numPoles / 2] = new PoleZeroPair(poles.first, zeros.first,
-                poles.second, zeros.second);
-        m_numPoles += 2;
-    }
+	void add(ComplexPair poles, ComplexPair zeros) {
+		m_pair[m_numPoles / 2] = new PoleZeroPair(poles.first, zeros.first,
+				poles.second, zeros.second);
+		m_numPoles += 2;
+	}
 
-    PoleZeroPair getPair(int pairIndex) {
-        return m_pair[pairIndex];
-    }
+	PoleZeroPair getPair(int pairIndex) {
+		return m_pair[pairIndex];
+	}
 
-    double getNormalW() {
-        return m_normalW;
-    }
+	double getNormalW() {
+		return m_normalW;
+	}
 
-    double getNormalGain() {
-        return m_normalGain;
-    }
+	double getNormalGain() {
+		return m_normalGain;
+	}
 
-    void setNormal(double w, double g) {
-        m_normalW = w;
-        m_normalGain = g;
-    }
+	void setNormal(double w, double g) {
+		m_normalW = w;
+		m_normalGain = g;
+	}
 };

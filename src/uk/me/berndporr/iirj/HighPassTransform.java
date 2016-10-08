@@ -1,4 +1,5 @@
 package uk.me.berndporr.iirj;
+
 /*******************************************************************************
 
  "A Collection of Useful C++ Classes for Digital Signal Processing"
@@ -35,48 +36,45 @@ package uk.me.berndporr.iirj;
 
  *******************************************************************************/
 
-
 import org.apache.commons.math3.complex.Complex;
-
 
 public class HighPassTransform {
 
-    double f;
+	double f;
 
-    Complex transform(Complex c) {
-        if (c.isInfinite())
-            return new Complex(1, 0);
+	HighPassTransform(double fc, LayoutBase digital, LayoutBase analog) {
+		digital.reset();
 
-        // frequency transform
-        c = c.multiply(f);
+		// prewarp
+		f = 1. / Math.tan(Math.PI * fc);
 
-        // bilinear high pass transform
-        return new Complex(-1).multiply((new Complex(1)).add(c)).divide((new Complex(1)).subtract(c));
-    }
+		int numPoles = analog.getNumPoles();
+		int pairs = numPoles / 2;
+		for (int i = 0; i < pairs; ++i) {
+			PoleZeroPair pair = analog.getPair(i);
+			digital.addPoleZeroConjugatePairs(transform(pair.poles.first),
+					transform(pair.zeros.first));
+		}
 
-    HighPassTransform(double fc,
-                      LayoutBase digital,
-                      LayoutBase analog) {
-        digital.reset();
+		if ((numPoles & 1) == 1) {
+			PoleZeroPair pair = analog.getPair(pairs);
+			digital.add(transform(pair.poles.first),
+					transform(pair.zeros.first));
+		}
 
-        // prewarp
-        f = 1. / Math.tan(Math.PI * fc);
+		digital.setNormal(Math.PI - analog.getNormalW(), analog.getNormalGain());
+	}
 
-        int numPoles = analog.getNumPoles();
-        int pairs = numPoles / 2;
-        for (int i = 0; i < pairs; ++i) {
-            PoleZeroPair pair = analog.getPair(i);
-            digital.addPoleZeroConjugatePairs(transform(pair.poles.first),
-                    transform(pair.zeros.first));
-        }
+	private Complex transform(Complex c) {
+		if (c.isInfinite())
+			return new Complex(1, 0);
 
-        if ((numPoles & 1) == 1) {
-            PoleZeroPair pair = analog.getPair(pairs);
-            digital.add(transform(pair.poles.first),
-                    transform(pair.zeros.first));
-        }
+		// frequency transform
+		c = c.multiply(f);
 
-        digital.setNormal(Math.PI - analog.getNormalW(),
-                analog.getNormalGain());
-    }
+		// bilinear high pass transform
+		return new Complex(-1).multiply((new Complex(1)).add(c)).divide(
+				(new Complex(1)).subtract(c));
+	}
+
 }
