@@ -1,4 +1,5 @@
 package uk.me.berndporr.iirj;
+
 /*******************************************************************************
 
  "A Collection of Useful C++ Classes for Digital Signal Processing"
@@ -35,7 +36,6 @@ package uk.me.berndporr.iirj;
 
  *******************************************************************************/
 
-
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexUtils;
 
@@ -45,86 +45,133 @@ import org.apache.commons.math3.complex.ComplexUtils;
 
 public class Butterworth extends Cascade {
 
-  class AnalogLowPass extends LayoutBase {
+	class AnalogLowPass extends LayoutBase {
 
-    int m_numPoles;
+		int m_numPoles;
 
-    AnalogLowPass(int nPoles) {
-    	super(nPoles);
-      m_numPoles = nPoles;
-      setNormal(0, 1);
-    }
+		AnalogLowPass(int nPoles) {
+			super(nPoles);
+			m_numPoles = nPoles;
+			setNormal(0, 1);
+		}
 
-    void design(int numPoles) {
-        m_numPoles = numPoles;
+		void design(int numPoles) {
+			m_numPoles = numPoles;
 
-        reset();
+			reset();
 
-        double n2 = 2 * numPoles;
-        int pairs = numPoles / 2;
-        for (int i = 0; i < pairs; ++i) {
-          Complex c = ComplexUtils.polar2Complex(1F, Math.PI + (2 * i + 1) * Math.PI / n2);
-          addPoleZeroConjugatePairs(c, Complex.INF);
-        }
+			double n2 = 2 * numPoles;
+			int pairs = numPoles / 2;
+			for (int i = 0; i < pairs; ++i) {
+				Complex c = ComplexUtils.polar2Complex(1F, Math.PI
+						+ (2 * i + 1) * Math.PI / n2);
+				addPoleZeroConjugatePairs(c, Complex.INF);
+			}
 
-        if ((numPoles & 1) == 1)
-          add(new Complex(-1), Complex.INF);
-    }
-  }
+			if ((numPoles & 1) == 1)
+				add(new Complex(-1), Complex.INF);
+		}
+	}
 
+	private void setupLowPass(int order, double sampleRate,
+			double cutoffFrequency, int directFormType) {
 
-    public  void lowPass(int order,
-			     double sampleRate,
-			     double cutoffFrequency) {
+		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		m_analogProto.design(order);
 
-      AnalogLowPass m_analogProto = new AnalogLowPass(order);
-      m_analogProto.design(order);
+		LayoutBase m_digitalProto = new LayoutBase(order);
 
-      LayoutBase m_digitalProto = new LayoutBase(order);
+		new LowPassTransform(cutoffFrequency / sampleRate, m_digitalProto,
+				m_analogProto);
 
-      new LowPassTransform(
-              cutoffFrequency / sampleRate,
-              m_digitalProto,
-              m_analogProto);
+		setLayout(m_digitalProto, directFormType);
+	}
 
-      setLayout(m_digitalProto, DirectFormAbstract.DIRECT_FORM_II);
-    }
+	public void lowPass(int order, double sampleRate, double cutoffFrequency) {
+		setupLowPass(order, sampleRate, cutoffFrequency,
+				DirectFormAbstract.DIRECT_FORM_II);
+	}
 
+	public void lowPass(int order, double sampleRate, double cutoffFrequency,
+			int directFormType) {
+		setupLowPass(order, sampleRate, cutoffFrequency, directFormType);
+	}
 
+	private void setupHighPass(int order, double sampleRate,
+			double cutoffFrequency, int directFormType) {
 
-    public void highPass(int order,
-                  double sampleRate,
-                  double cutoffFrequency) {
+		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		m_analogProto.design(order);
 
-      AnalogLowPass m_analogProto = new AnalogLowPass(order);
-      m_analogProto.design(order);
+		LayoutBase m_digitalProto = new LayoutBase(order);
 
-      LayoutBase m_digitalProto = new LayoutBase(order);
+		new HighPassTransform(cutoffFrequency / sampleRate, m_digitalProto,
+				m_analogProto);
 
-      new HighPassTransform(cutoffFrequency / sampleRate,
-              m_digitalProto,
-              m_analogProto);
+		setLayout(m_digitalProto, directFormType);
+	}
 
-      setLayout(m_digitalProto, DirectFormAbstract.DIRECT_FORM_II);
-    }
+	public void highPass(int order, double sampleRate, double cutoffFrequency,
+			int directFormType) {
+		setupHighPass(order, sampleRate, cutoffFrequency, directFormType);
+	}
 
+	public void highPass(int order, double sampleRate, double cutoffFrequency) {
+		setupHighPass(order, sampleRate, cutoffFrequency,
+				DirectFormAbstract.DIRECT_FORM_II);
+	}
 
-    public void bandStop(int order,
-                  double sampleRate,
-                  double centerFrequency,
-                  double widthFrequency) {
+	private void setupBandStop(int order, double sampleRate,
+			double centerFrequency, double widthFrequency, int directFormType) {
 
-      AnalogLowPass m_analogProto = new AnalogLowPass(order);
-      m_analogProto.design(order);
+		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		m_analogProto.design(order);
 
-      LayoutBase m_digitalProto = new LayoutBase(order*2);
+		LayoutBase m_digitalProto = new LayoutBase(order * 2);
 
-      new BandStopTransform(centerFrequency / sampleRate,
-              widthFrequency / sampleRate,
-              m_digitalProto,
-              m_analogProto);
+		new BandStopTransform(centerFrequency / sampleRate, widthFrequency
+				/ sampleRate, m_digitalProto, m_analogProto);
 
-      setLayout(m_digitalProto, DirectFormAbstract.DIRECT_FORM_II);
-    }
+		setLayout(m_digitalProto, directFormType);
+	}
+
+	public void bandStop(int order, double sampleRate, double centerFrequency,
+			double widthFrequency) {
+		setupBandStop(order, sampleRate, centerFrequency, widthFrequency,
+				DirectFormAbstract.DIRECT_FORM_II);
+	}
+
+	public void bandStop(int order, double sampleRate, double centerFrequency,
+			double widthFrequency, int directFormType) {
+		setupBandStop(order, sampleRate, centerFrequency, widthFrequency,
+				directFormType);
+	}
+
+	private void setupBandPass(int order, double sampleRate,
+			double centerFrequency, double widthFrequency, int directFormType) {
+
+		AnalogLowPass m_analogProto = new AnalogLowPass(order);
+		m_analogProto.design(order);
+
+		LayoutBase m_digitalProto = new LayoutBase(order * 2);
+
+		new BandPassTransform(centerFrequency / sampleRate, widthFrequency
+				/ sampleRate, m_digitalProto, m_analogProto);
+
+		setLayout(m_digitalProto, directFormType);
+
+	}
+
+	public void bandPass(int order, double sampleRate, double centerFrequency,
+			double widthFrequency) {
+		setupBandPass(order, sampleRate, centerFrequency, widthFrequency,
+				DirectFormAbstract.DIRECT_FORM_II);
+	}
+
+	public void bandPass(int order, double sampleRate, double centerFrequency,
+			double widthFrequency, int directFormType) {
+		setupBandPass(order, sampleRate, centerFrequency, widthFrequency,
+				directFormType);
+	}
 
 }
