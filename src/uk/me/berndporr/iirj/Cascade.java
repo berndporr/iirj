@@ -80,8 +80,11 @@ public class Cascade {
 
 	public double filter(double in) {
 		double out = in;
-		for (int i = 0; i < m_numBiquads; i++)
+		for (int i = 0; i < m_numBiquads; i++) {
+			if (m_states[i] != null) {
 			out = m_states[i].process1(out, m_biquads[i]);
+			}
+		}
 		return out;
 	}
 
