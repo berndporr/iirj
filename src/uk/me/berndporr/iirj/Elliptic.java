@@ -42,7 +42,7 @@ import org.apache.commons.math3.complex.Complex;
  * User facing class which contains all the methods the user uses to create
  * Elliptic filters. This done in this way: Elliptic elliptic = new Elliptic();
  * Then call one of the methods below to create low-,high-,band-, or stopband
- * filters. For example: butterworth.bandPass(2,250,50,5);
+ * filters. For example: elliptic.bandPass(2,250,50,5,0.5,2);
  */
 public class Elliptic extends Cascade {
 
