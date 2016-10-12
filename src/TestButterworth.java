@@ -7,7 +7,7 @@ import uk.me.berndporr.iirj.Butterworth;
 
 
 // Various impulse responses written out to files so that you can plot them
-public class Test {
+public class TestButterworth {
 
 	static void bandPassTest() {
 		Butterworth butterworth = new Butterworth();
