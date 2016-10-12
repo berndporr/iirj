@@ -44,6 +44,8 @@ import org.apache.commons.math3.complex.Complex;
  *
  */
 public class MathSupplement {
+	
+	public static double doubleLn10 =2.3025850929940456840179914546844;
 
 	static Complex solve_quadratic_1(double a, double b, double c) {
 		return (new Complex(-b).add(new Complex(b * b - 4 * a * c, 0)).sqrt())

@@ -544,6 +544,24 @@ public class Elliptic extends Cascade {
 
 	}
 
+	/**
+	 * Bandpass filter with custom topology
+	 * 
+	 * @param order
+	 *            Filter order
+	 * @param sampleRate
+	 *            Sampling rate
+	 * @param centerFrequency
+	 *            Center frequency
+	 * @param widthFrequency
+	 *            Width of the notch
+	 * @param rippleDb
+	 *            passband ripple in decibel
+	 *            sensible value: 1dB
+	 * @param rolloff
+	 *            the filter rolloff (transition between pass/stopband)
+	 *            sensible value: 2
+	 */
 	public void bandPass(int order, double sampleRate, double centerFrequency,
 			double widthFrequency, double rippleDb, double rolloff) {
 		setupBandPass(order, sampleRate, centerFrequency, widthFrequency,
