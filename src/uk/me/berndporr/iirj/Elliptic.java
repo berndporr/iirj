@@ -354,7 +354,7 @@ public class Elliptic extends Cascade {
 	}
 
 	/**
-	 * Elliptic Lowpass filter
+	 * Elliptic Lowpass filter with default toplogy
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -376,7 +376,7 @@ public class Elliptic extends Cascade {
 	}
 
 	/**
-	 * Elliptic Lowpass filter and defining the filter topology
+	 * Elliptic Lowpass filter with custom filter topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -400,6 +400,10 @@ public class Elliptic extends Cascade {
 				directFormType);
 	}
 
+	
+	
+	
+	
 	private void setupHighPass(int order, double sampleRate,
 			double cutoffFrequency, double rippleDb, double rolloff,
 			int directFormType) {
@@ -416,7 +420,7 @@ public class Elliptic extends Cascade {
 	}
 
 	/**
-	 * Elliptic Highpass filter
+	 * Elliptic Highpass filter with default topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -438,7 +442,7 @@ public class Elliptic extends Cascade {
 	}
 
 	/**
-	 * Elliptic Lowpass filter and defining the filter topology
+	 * Elliptic Highpass filter with custom topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -462,6 +466,9 @@ public class Elliptic extends Cascade {
 				directFormType);
 	}
 
+	
+	
+	
 	private void setupBandStop(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, double rippleDb,
 			double rolloff, int directFormType) {
@@ -502,7 +509,7 @@ public class Elliptic extends Cascade {
 	}
 
 	/**
-	 * Bandstop filter with default topology
+	 * Bandstop filter with custom topology
 	 * 
 	 * @param order
 	 *            Filter order (actual order is twice)
@@ -512,14 +519,14 @@ public class Elliptic extends Cascade {
 	 *            Center frequency
 	 * @param widthFrequency
 	 *            Width of the notch
-	 * @param directFormType
-	 *            The filter topology
 	 * @param rippleDb
 	 *            passband ripple in decibel
 	 *            sensible value: 1dB
 	 * @param rolloff
 	 *            the filter rolloff (transition between pass/stopband)
 	 *            sensible value: 2
+	 * @param directFormType
+	 *            The filter topology
 	 */
 	public void bandStop(int order, double sampleRate, double centerFrequency,
 			double widthFrequency, int directFormType, double rippleDb,
@@ -528,6 +535,11 @@ public class Elliptic extends Cascade {
 				rippleDb, rolloff, directFormType);
 	}
 
+
+	
+	
+	
+	
 	private void setupBandPass(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, double rippleDb,
 			double rolloff, int directFormType) {
@@ -545,7 +557,7 @@ public class Elliptic extends Cascade {
 	}
 
 	/**
-	 * Bandpass filter with custom topology
+	 * Bandpass filter with default topology
 	 * 
 	 * @param order
 	 *            Filter order

@@ -9,7 +9,7 @@ import uk.me.berndporr.iirj.Elliptic;
 // Various impulse responses written out to files so that you can plot them
 public class TestElliptic {
 	
-	static double ripple = 0.1; // db
+	static double ripple = 1; // db
 	static double rolloff = 2;
 
 	static void bandPassTest() {

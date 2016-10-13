@@ -48,8 +48,6 @@ public class ChebyshevI extends Cascade {
 
 	class AnalogLowPass extends LayoutBase {
 
-		// shit ton of math in here
-
 		int m_numPoles;
 		double m_rippleDb;
 
@@ -108,7 +106,7 @@ public class ChebyshevI extends Cascade {
 	}
 
 	/**
-	 * ChebyshevI Lowpass filter
+	 * ChebyshevI Lowpass filter with default toplogy
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -127,7 +125,7 @@ public class ChebyshevI extends Cascade {
 	}
 
 	/**
-	 * ChebyshevI Lowpass filter and defining the filter topology
+	 * ChebyshevI Lowpass filter with custom topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -148,6 +146,9 @@ public class ChebyshevI extends Cascade {
 				directFormType);
 	}
 
+	
+	
+	
 	private void setupHighPass(int order, double sampleRate,
 			double cutoffFrequency, double rippleDb, 
 			int directFormType) {
@@ -164,7 +165,7 @@ public class ChebyshevI extends Cascade {
 	}
 
 	/**
-	 * ChebyshevI Highpass filter
+	 * ChebyshevI Highpass filter with default topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -183,7 +184,7 @@ public class ChebyshevI extends Cascade {
 	}
 
 	/**
-	 * ChebyshevI Lowpass filter and defining the filter topology
+	 * ChebyshevI Lowpass filter and custom filter topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -204,6 +205,9 @@ public class ChebyshevI extends Cascade {
 				directFormType);
 	}
 
+	
+	
+	
 	private void setupBandStop(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, double rippleDb,
 			int directFormType) {
@@ -241,7 +245,7 @@ public class ChebyshevI extends Cascade {
 	}
 
 	/**
-	 * Bandstop filter with default topology
+	 * Bandstop filter with custom topology
 	 * 
 	 * @param order
 	 *            Filter order (actual order is twice)
@@ -251,11 +255,11 @@ public class ChebyshevI extends Cascade {
 	 *            Center frequency
 	 * @param widthFrequency
 	 *            Width of the notch
-	 * @param directFormType
-	 *            The filter topology
 	 * @param rippleDb
 	 *            passband ripple in decibel
 	 *            sensible value: 1dB
+	 * @param directFormType
+	 *            The filter topology
 	 */
 	public void bandStop(int order, double sampleRate, double centerFrequency,
 			double widthFrequency, double rippleDb, int directFormType) {
@@ -263,6 +267,9 @@ public class ChebyshevI extends Cascade {
 				rippleDb,  directFormType);
 	}
 
+	
+	
+	
 	private void setupBandPass(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, double rippleDb,
 			int directFormType) {
@@ -279,6 +286,21 @@ public class ChebyshevI extends Cascade {
 
 	}
 
+	/**
+	 * Bandpass filter with default topology
+	 * 
+	 * @param order
+	 *            Filter order
+	 * @param sampleRate
+	 *            Sampling rate
+	 * @param centerFrequency
+	 *            Center frequency
+	 * @param widthFrequency
+	 *            Width of the notch
+	 * @param rippleDb
+	 *            passband ripple in decibel
+	 *            sensible value: 1dB
+	 */
 	public void bandPass(int order, double sampleRate, double centerFrequency,
 			double widthFrequency, double rippleDb) {
 		setupBandPass(order, sampleRate, centerFrequency, widthFrequency,

@@ -92,7 +92,7 @@ public class Butterworth extends Cascade {
 	}
 
 	/**
-	 * Butterworth Lowpass filter
+	 * Butterworth Lowpass filter with default topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -107,7 +107,7 @@ public class Butterworth extends Cascade {
 	}
 
 	/**
-	 * Butterworth Lowpass filter and defining the filter topology
+	 * Butterworth Lowpass filter with custom topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -124,6 +124,9 @@ public class Butterworth extends Cascade {
 		setupLowPass(order, sampleRate, cutoffFrequency, directFormType);
 	}
 
+	
+	
+	
 	private void setupHighPass(int order, double sampleRate,
 			double cutoffFrequency, int directFormType) {
 
@@ -139,7 +142,7 @@ public class Butterworth extends Cascade {
 	}
 
 	/**
-	 * Highpass filter
+	 * Highpass filter with custom topology
 	 * 
 	 * @param order
 	 *            Filter order (ideally only even orders)
@@ -170,6 +173,9 @@ public class Butterworth extends Cascade {
 				DirectFormAbstract.DIRECT_FORM_II);
 	}
 
+	
+	
+	
 	private void setupBandStop(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, int directFormType) {
 
@@ -203,7 +209,7 @@ public class Butterworth extends Cascade {
 	}
 
 	/**
-	 * Bandstop filter with default topology
+	 * Bandstop filter with custom topology
 	 * 
 	 * @param order
 	 *            Filter order (actual order is twice)
@@ -222,6 +228,9 @@ public class Butterworth extends Cascade {
 				directFormType);
 	}
 
+	
+	
+	
 	private void setupBandPass(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, int directFormType) {
 
@@ -237,6 +246,18 @@ public class Butterworth extends Cascade {
 
 	}
 
+	/**
+	 * Bandpass filter with default topology
+	 * 
+	 * @param order
+	 *            Filter order
+	 * @param sampleRate
+	 *            Sampling rate
+	 * @param centerFrequency
+	 *            Center frequency
+	 * @param widthFrequency
+	 *            Width of the notch
+	 */
 	public void bandPass(int order, double sampleRate, double centerFrequency,
 			double widthFrequency) {
 		setupBandPass(order, sampleRate, centerFrequency, widthFrequency,
