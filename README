@@ -1,43 +1,51 @@
-# iirj
+iirj
+====
+
 An IIR filter library written in JAVA.
 
 Filters: Butterworth, Elliptic (Cauer) and Chebyshev Type I
 
 It's based on the IIR1 library: https://github.com/berndporr/iir1
 
-## Dependencies
+Dependencies
+------------
 You need the Apache Commons Math libraries from here:
-
 http://commons.apache.org/proper/commons-math/index.html
 
-## Usage
+Usage
+-----
+For example the Butterworth filter:
 
-### Init
+1) Init
 Butterworth butterworth = new Butterworth();
 
-### Bandstop
+1a) Bandstop
 butterworth.bandStop(order,Samplingfreq,Center freq,Width in frequ);
 
-### Bandpass
+1b) Bandpass
 butterworth.bandPass(order,Samplingfreq,Center freq,Width in frequ);
 
-### Lowpass
+1c) Lowpass
 butterworth.lowPass(order,Samplingfreq,Cutoff frequ);
 
-### Highpass
+1d) Highpass
 butterworth.highPass(order,Samplingfreq,Cutoff frequ);
 
-### Filtering
+2) Filtering
 sample by sample for realtime processing:
 
 v = butterworth.filter(v)
 
-See the Test*.java files for a complete examples.
+Coding examples
+---------------
+See the Test*.java files for complete examples.
 You can run them easily from eclipse or the commandline.
-These test programs write the impulse responses of the
+These test programs write the different impulse responses of the
 filters to text files which you can then plot with
-the octave script filtertest.m
+the octave script filtertest.m Also very useful to tweak the
+filter parameters and see the effects.
 
 Have fun
 
 /Bernd Porr
+mail@berndporr.me.uk
