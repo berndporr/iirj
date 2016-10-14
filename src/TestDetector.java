@@ -41,8 +41,7 @@ public class TestDetector {
 			time = time + 1.0/125.0;
 			String data = is.nextLine();
 			//System.out.println(data);
-			String[] fields = data.split(" ");
-			v = Double.parseDouble(fields[10]);
+			v = Double.parseDouble(data);
 			v = butterworth.filter(v);
 			v = v*v;
 			bp.println(""+v);
