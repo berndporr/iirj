@@ -51,28 +51,25 @@ public class Butterworth extends Cascade {
 
 	class AnalogLowPass extends LayoutBase {
 
-		int m_numPoles;
+		int nPoles;
 
-		AnalogLowPass(int nPoles) {
-			super(nPoles);
-			m_numPoles = nPoles;
+		AnalogLowPass(int _nPoles) {
+			super(_nPoles);
+			nPoles = _nPoles;
 			setNormal(0, 1);
 		}
 
-		void design(int numPoles) {
-			m_numPoles = numPoles;
-
+		void design() {
 			reset();
-
-			double n2 = 2 * numPoles;
-			int pairs = numPoles / 2;
+			double n2 = 2 * nPoles;
+			int pairs = nPoles / 2;
 			for (int i = 0; i < pairs; ++i) {
 				Complex c = ComplexUtils.polar2Complex(1F, Math.PI
 						+ (2 * i + 1) * Math.PI / n2);
 				addPoleZeroConjugatePairs(c, Complex.INF);
 			}
 
-			if ((numPoles & 1) == 1)
+			if ((nPoles & 1) == 1)
 				add(new Complex(-1), Complex.INF);
 		}
 	}
@@ -81,7 +78,7 @@ public class Butterworth extends Cascade {
 			double cutoffFrequency, int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-		m_analogProto.design(order);
+		m_analogProto.design();
 
 		LayoutBase m_digitalProto = new LayoutBase(order);
 
@@ -131,7 +128,7 @@ public class Butterworth extends Cascade {
 			double cutoffFrequency, int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-		m_analogProto.design(order);
+		m_analogProto.design();
 
 		LayoutBase m_digitalProto = new LayoutBase(order);
 
@@ -180,7 +177,7 @@ public class Butterworth extends Cascade {
 			double centerFrequency, double widthFrequency, int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-		m_analogProto.design(order);
+		m_analogProto.design();
 
 		LayoutBase m_digitalProto = new LayoutBase(order * 2);
 
@@ -235,7 +232,7 @@ public class Butterworth extends Cascade {
 			double centerFrequency, double widthFrequency, int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-		m_analogProto.design(order);
+		m_analogProto.design();
 
 		LayoutBase m_digitalProto = new LayoutBase(order * 2);
 

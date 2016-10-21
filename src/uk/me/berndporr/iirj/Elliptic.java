@@ -50,7 +50,7 @@ public class Elliptic extends Cascade {
 
 		// shit ton of math in here
 
-		int m_numPoles;
+		int nPoles;
 		double m_rippleDb;
 		double m_rolloff;
 
@@ -75,101 +75,93 @@ public class Elliptic extends Cascade {
 
 		// ------------------------------------------------------------------------------
 
-		AnalogLowPass(int nPoles) {
-			super(nPoles);
-			m_numPoles = nPoles;
+		AnalogLowPass(int _nPoles) {
+			super(_nPoles);
+			nPoles = _nPoles;
 			setNormal(0, 1);
 		}
 
-		void design(int numPoles, double rippleDb, double rolloff) {
-			if (m_numPoles != numPoles || m_rippleDb != rippleDb
-					|| m_rolloff != rolloff) {
-				m_numPoles = numPoles;
-				m_rippleDb = rippleDb;
-				m_rolloff = rolloff;
+		void design(double rippleDb, double rolloff) {
+			reset();
 
-				reset();
+			int n = nPoles;
 
-				int n = numPoles;
+			double e2 = Math.pow(10., rippleDb / 10) - 1;
+			double xi = 5 * Math.exp(rolloff - 1) + 1;
 
-				double e2 = Math.pow(10., rippleDb / 10) - 1;
-				double xi = 5 * Math.exp(rolloff - 1) + 1;
+			m_K = ellipticK(1 / xi);
+			m_Kprime = ellipticK(Math.sqrt(1 - 1 / (xi * xi)));
 
-				m_K = ellipticK(1 / xi);
-				m_Kprime = ellipticK(Math.sqrt(1 - 1 / (xi * xi)));
-
-				int ni = ((n & 1) == 1) ? 0 : 1;
-				int i;
-				double[] f = new double[100]; // HACK!!!
-				for (i = 1; i <= n / 2; i++) {
-					double u = (2 * i - ni) * m_K / n;
-					double sn = calcsn(u);
-					sn = sn * 2 * Math.PI / m_K;
-					f[i] = m_zeros[i - 1] = 1 / sn;
-				}
-				m_zeros[n / 2] = Double.POSITIVE_INFINITY;
-				double fb = 1 / (2 * Math.PI);
-				m_nin = n % 2;
-				m_n2 = n / 2;
-				for (i = 1; i <= m_n2; i++) {
-					double x = f[m_n2 + 1 - i];
-					m_z1[i] = Math.sqrt(1 - 1 / (x * x));
-				}
-				double ee = e2;// pow(10., rippleDb/20)-1;
-				m_e = Math.sqrt(ee);
-				double fbb = fb * fb;
-				m_m = m_nin + 2 * m_n2;
-				m_em = 2 * (m_m / 2);
-				double tp = 2 * Math.PI;
-				calcfz();
-				calcqz();
-				if (m_m > m_em)
-					m_c1[2 * m_m] = 0;
-				for (i = 0; i <= 2 * m_m; i += 2)
-					m_a1[m_m - i / 2] = m_c1[i] + m_d1[i];
-				double a0 = findfact(m_m);
-				int r = 0;
-				while (r < m_em / 2) {
-					r++;
-					m_p[r] /= 10;
-					m_q1[r] /= 100;
-					double d = 1 + m_p[r] + m_q1[r];
-					m_b1[r] = (1 + m_p[r] / 2) * fbb / d;
-					m_zf1[r] = fb / Math.pow(d, .25);
-					m_zq1[r] = 1 / Math.sqrt(Math.abs(2 * (1 - m_b1[r]
-							/ (m_zf1[r] * m_zf1[r]))));
-					m_zw1[r] = tp * m_zf1[r];
-
-					m_rootR[r] = -.5 * m_zw1[r] / m_zq1[r];
-					m_rootR[r + m_em / 2] = m_rootR[r];
-					m_rootI[r] = .5 * Math.sqrt(Math.abs(m_zw1[r] * m_zw1[r]
-							/ (m_zq1[r] * m_zq1[r]) - 4 * m_zw1[r] * m_zw1[r]));
-					m_rootI[r + m_em / 2] = -m_rootI[r];
-
-					Complex pole = new Complex(-.5 * m_zw1[r] / m_zq1[r],
-							.5 * Math.sqrt(Math.abs(m_zw1[r] * m_zw1[r]
-									/ (m_zq1[r] * m_zq1[r]) - 4 * m_zw1[r]
-									* m_zw1[r])));
-
-					Complex zero = new Complex(0, m_zeros[r - 1]);
-
-					addPoleZeroConjugatePairs(pole, zero);
-				}
-
-				if (a0 != 0) {
-					m_rootR[r + 1 + m_em / 2] = -Math.sqrt(fbb / (.1 * a0 - 1))
-							* tp;
-					m_rootI[r + 1 + m_em / 2] = 0;
-
-					add(new Complex(-Math.sqrt(fbb / (.1 * a0 - 1)) * tp),
-							new Complex(Double.POSITIVE_INFINITY));
-				}
-
-				setNormal(
-						0,
-						((numPoles & 1) == 1) ? 1. : Math.pow(10.,
-								-rippleDb / 20.0));
+			int ni = ((n & 1) == 1) ? 0 : 1;
+			int i;
+			double[] f = new double[100]; // HACK!!!
+			for (i = 1; i <= n / 2; i++) {
+				double u = (2 * i - ni) * m_K / n;
+				double sn = calcsn(u);
+				sn = sn * 2 * Math.PI / m_K;
+				f[i] = m_zeros[i - 1] = 1 / sn;
 			}
+			m_zeros[n / 2] = Double.POSITIVE_INFINITY;
+			double fb = 1 / (2 * Math.PI);
+			m_nin = n % 2;
+			m_n2 = n / 2;
+			for (i = 1; i <= m_n2; i++) {
+				double x = f[m_n2 + 1 - i];
+				m_z1[i] = Math.sqrt(1 - 1 / (x * x));
+			}
+			double ee = e2;// pow(10., rippleDb/20)-1;
+			m_e = Math.sqrt(ee);
+			double fbb = fb * fb;
+			m_m = m_nin + 2 * m_n2;
+			m_em = 2 * (m_m / 2);
+			double tp = 2 * Math.PI;
+			calcfz();
+			calcqz();
+			if (m_m > m_em)
+				m_c1[2 * m_m] = 0;
+			for (i = 0; i <= 2 * m_m; i += 2)
+				m_a1[m_m - i / 2] = m_c1[i] + m_d1[i];
+			double a0 = findfact(m_m);
+			int r = 0;
+			while (r < m_em / 2) {
+				r++;
+				m_p[r] /= 10;
+				m_q1[r] /= 100;
+				double d = 1 + m_p[r] + m_q1[r];
+				m_b1[r] = (1 + m_p[r] / 2) * fbb / d;
+				m_zf1[r] = fb / Math.pow(d, .25);
+				m_zq1[r] = 1 / Math.sqrt(Math.abs(2 * (1 - m_b1[r]
+						/ (m_zf1[r] * m_zf1[r]))));
+				m_zw1[r] = tp * m_zf1[r];
+
+				m_rootR[r] = -.5 * m_zw1[r] / m_zq1[r];
+				m_rootR[r + m_em / 2] = m_rootR[r];
+				m_rootI[r] = .5 * Math.sqrt(Math.abs(m_zw1[r] * m_zw1[r]
+						/ (m_zq1[r] * m_zq1[r]) - 4 * m_zw1[r] * m_zw1[r]));
+				m_rootI[r + m_em / 2] = -m_rootI[r];
+
+				Complex pole = new Complex(-.5 * m_zw1[r] / m_zq1[r],
+						.5 * Math.sqrt(Math.abs(m_zw1[r] * m_zw1[r]
+								/ (m_zq1[r] * m_zq1[r]) - 4 * m_zw1[r]
+								* m_zw1[r])));
+
+				Complex zero = new Complex(0, m_zeros[r - 1]);
+
+				addPoleZeroConjugatePairs(pole, zero);
+			}
+
+			if (a0 != 0) {
+				m_rootR[r + 1 + m_em / 2] = -Math.sqrt(fbb / (.1 * a0 - 1))
+						* tp;
+				m_rootI[r + 1 + m_em / 2] = 0;
+
+				add(new Complex(-Math.sqrt(fbb / (.1 * a0 - 1)) * tp),
+						new Complex(Double.POSITIVE_INFINITY));
+			}
+
+			setNormal(0,
+					((nPoles & 1) == 1) ? 1. : Math.pow(10., -rippleDb / 20.0));
+
 		}
 
 		// generate the product of (z+s1[i]) for i = 1 .. sn and store it in
@@ -343,7 +335,7 @@ public class Elliptic extends Cascade {
 			int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-		m_analogProto.design(order, rippleDb, rolloff);
+		m_analogProto.design(rippleDb, rolloff);
 
 		LayoutBase m_digitalProto = new LayoutBase(order);
 
@@ -363,11 +355,10 @@ public class Elliptic extends Cascade {
 	 * @param cutoffFrequency
 	 *            the cutoff frequency
 	 * @param rippleDb
-	 *            passband ripple in decibel
-	 *            sensible value: 1dB
+	 *            passband ripple in decibel sensible value: 1dB
 	 * @param rolloff
-	 *            the filter rolloff (transition between pass/stopband)
-	 *            sensible value: 2
+	 *            the filter rolloff (transition between pass/stopband) sensible
+	 *            value: 2
 	 */
 	public void lowPass(int order, double sampleRate, double cutoffFrequency,
 			double rippleDb, double rolloff) {
@@ -385,11 +376,10 @@ public class Elliptic extends Cascade {
 	 * @param cutoffFrequency
 	 *            The cutoff frequency
 	 * @param rippleDb
-	 *            passband ripple in decibel
-	 *            sensible value: 1dB
+	 *            passband ripple in decibel sensible value: 1dB
 	 * @param rolloff
-	 *            the filter rolloff (transition between pass/stopband)
-	 *            sensible value: 2
+	 *            the filter rolloff (transition between pass/stopband) sensible
+	 *            value: 2
 	 * @param directFormType
 	 *            The filter topology. This is either
 	 *            DirectFormAbstract.DIRECT_FORM_I or DIRECT_FORM_II
@@ -400,16 +390,12 @@ public class Elliptic extends Cascade {
 				directFormType);
 	}
 
-	
-	
-	
-	
 	private void setupHighPass(int order, double sampleRate,
 			double cutoffFrequency, double rippleDb, double rolloff,
 			int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-		m_analogProto.design(order, rippleDb, rolloff);
+		m_analogProto.design(rippleDb, rolloff);
 
 		LayoutBase m_digitalProto = new LayoutBase(order);
 
@@ -429,11 +415,10 @@ public class Elliptic extends Cascade {
 	 * @param cutoffFrequency
 	 *            the cutoff frequency
 	 * @param rippleDb
-	 *            passband ripple in decibel
-	 *            sensible value: 1dB
+	 *            passband ripple in decibel sensible value: 1dB
 	 * @param rolloff
-	 *            the filter rolloff (transition between pass/stopband)
-	 *            sensible value: 2
+	 *            the filter rolloff (transition between pass/stopband) sensible
+	 *            value: 2
 	 */
 	public void highPass(int order, double sampleRate, double cutoffFrequency,
 			double rippleDb, double rolloff) {
@@ -451,11 +436,10 @@ public class Elliptic extends Cascade {
 	 * @param cutoffFrequency
 	 *            The cutoff frequency
 	 * @param rippleDb
-	 *            passband ripple in decibel
-	 *            sensible value: 1dB
+	 *            passband ripple in decibel sensible value: 1dB
 	 * @param rolloff
-	 *            the filter rolloff (transition between pass/stopband)
-	 *            sensible value: 2
+	 *            the filter rolloff (transition between pass/stopband) sensible
+	 *            value: 2
 	 * @param directFormType
 	 *            The filter topology. This is either
 	 *            DirectFormAbstract.DIRECT_FORM_I or DIRECT_FORM_II
@@ -466,15 +450,12 @@ public class Elliptic extends Cascade {
 				directFormType);
 	}
 
-	
-	
-	
 	private void setupBandStop(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, double rippleDb,
 			double rolloff, int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-		m_analogProto.design(order, rippleDb, rolloff);
+		m_analogProto.design(rippleDb, rolloff);
 
 		LayoutBase m_digitalProto = new LayoutBase(order * 2);
 
@@ -496,11 +477,10 @@ public class Elliptic extends Cascade {
 	 * @param widthFrequency
 	 *            Width of the notch
 	 * @param rippleDb
-	 *            passband ripple in decibel
-	 *            sensible value: 1dB
+	 *            passband ripple in decibel sensible value: 1dB
 	 * @param rolloff
-	 *            the filter rolloff (transition between pass/stopband)
-	 *            sensible value: 2
+	 *            the filter rolloff (transition between pass/stopband) sensible
+	 *            value: 2
 	 */
 	public void bandStop(int order, double sampleRate, double centerFrequency,
 			double widthFrequency, double rippleDb, double rolloff) {
@@ -520,11 +500,10 @@ public class Elliptic extends Cascade {
 	 * @param widthFrequency
 	 *            Width of the notch
 	 * @param rippleDb
-	 *            passband ripple in decibel
-	 *            sensible value: 1dB
+	 *            passband ripple in decibel sensible value: 1dB
 	 * @param rolloff
-	 *            the filter rolloff (transition between pass/stopband)
-	 *            sensible value: 2
+	 *            the filter rolloff (transition between pass/stopband) sensible
+	 *            value: 2
 	 * @param directFormType
 	 *            The filter topology
 	 */
@@ -535,17 +514,12 @@ public class Elliptic extends Cascade {
 				rippleDb, rolloff, directFormType);
 	}
 
-
-	
-	
-	
-	
 	private void setupBandPass(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, double rippleDb,
 			double rolloff, int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-		m_analogProto.design(order, rippleDb, rolloff);
+		m_analogProto.design(rippleDb, rolloff);
 
 		LayoutBase m_digitalProto = new LayoutBase(order * 2);
 
@@ -568,11 +542,10 @@ public class Elliptic extends Cascade {
 	 * @param widthFrequency
 	 *            Width of the notch
 	 * @param rippleDb
-	 *            passband ripple in decibel
-	 *            sensible value: 1dB
+	 *            passband ripple in decibel sensible value: 1dB
 	 * @param rolloff
-	 *            the filter rolloff (transition between pass/stopband)
-	 *            sensible value: 2
+	 *            the filter rolloff (transition between pass/stopband) sensible
+	 *            value: 2
 	 */
 	public void bandPass(int order, double sampleRate, double centerFrequency,
 			double widthFrequency, double rippleDb, double rolloff) {
@@ -592,11 +565,10 @@ public class Elliptic extends Cascade {
 	 * @param widthFrequency
 	 *            Width of the notch
 	 * @param rippleDb
-	 *            passband ripple in decibel
-	 *            sensible value: 1dB
+	 *            passband ripple in decibel sensible value: 1dB
 	 * @param rolloff
-	 *            the filter rolloff (transition between pass/stopband)
-	 *            sensible value: 2
+	 *            the filter rolloff (transition between pass/stopband) sensible
+	 *            value: 2
 	 * @param directFormType
 	 *            The filter topology (see DirectFormAbstract)
 	 */
