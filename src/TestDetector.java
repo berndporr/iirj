@@ -9,6 +9,10 @@ import uk.me.berndporr.iirj.Butterworth;
 
 
 // Detect the heartbeat in an ECG
+// The idea is to create a matched filter for ECG which in turn is
+// a bandpass and which in turn could be understood as a wavelet.
+// The center and bandwidth here are experimental results so that the
+// impulse response resembles the timing of an R peak.
 public class TestDetector {
 
 	static void bandPassTest() {
