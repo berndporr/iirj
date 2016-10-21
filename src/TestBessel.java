@@ -11,7 +11,7 @@ public class TestBessel {
 
 	static void bandPassTest() {
 		Bessel bessel = new Bessel();
-		bessel.bandPass(2,250,50,5);
+		bessel.bandPass(4,250,50,5);
 		
 		FileOutputStream os = null;
 		try {
@@ -39,7 +39,7 @@ public class TestBessel {
 	
 	static void bandStopTest() {
 		Bessel bessel = new Bessel();
-		bessel.bandStop(2,250,50,5);
+		bessel.bandStop(4,250,50,5);
 		
 		FileOutputStream os = null;
 		try {
