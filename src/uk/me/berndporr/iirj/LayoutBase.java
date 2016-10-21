@@ -57,7 +57,7 @@ public class LayoutBase {
 	}
 
 	LayoutBase(int numPoles) {
-		m_numPoles = numPoles;
+		m_numPoles = 0;
 		m_pair = new PoleZeroPair[numPoles / 2];
 	}
 
@@ -75,12 +75,16 @@ public class LayoutBase {
 	}
 
 	void addPoleZeroConjugatePairs(Complex pole, Complex zero) {
+		if (pole == null) System.out.println("LayoutBase addConj() pole == null");
+		if (zero == null) System.out.println("LayoutBase addConj() zero == null");
+		if (m_pair == null) System.out.println("LayoutBase addConj() m_pair == null");
 		m_pair[m_numPoles / 2] = new PoleZeroPair(pole, zero, pole.conjugate(),
 				zero.conjugate());
 		m_numPoles += 2;
 	}
 
 	void add(ComplexPair poles, ComplexPair zeros) {
+		System.out.println("LayoutBase add() numPoles="+m_numPoles);
 		m_pair[m_numPoles / 2] = new PoleZeroPair(poles.first, zeros.first,
 				poles.second, zeros.second);
 		m_numPoles += 2;

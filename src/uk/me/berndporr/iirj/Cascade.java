@@ -113,7 +113,9 @@ public class Cascade {
 	void applyScale(double scale) {
 		// For higher order filters it might be helpful
 		// to spread this factor between all the stages.
-		m_biquads[0].applyScale(scale);
+		if (m_biquads.length>0) {
+			m_biquads[0].applyScale(scale);
+		}
 	}
 
 	void setLayout(LayoutBase proto, int filterTypes) {
