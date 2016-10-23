@@ -35,6 +35,8 @@ import org.junit.Test;
 // impulse response resembles the timing of an R peak.
 public class DetectorTest {
 
+	static String prefix="target/surefire-reports/";
+
 	@Test
 	public void detTest() throws Exception {
 		Butterworth butterworth = new Butterworth();
@@ -43,7 +45,7 @@ public class DetectorTest {
 		
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("det.txt");
+			os = new FileOutputStream(prefix+"det.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			throw e;
@@ -52,7 +54,7 @@ public class DetectorTest {
 		
 		FileOutputStream heartrate = null;
 		try {
-			heartrate = new FileOutputStream("hr.txt");
+			heartrate = new FileOutputStream(prefix+"hr.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			throw e;

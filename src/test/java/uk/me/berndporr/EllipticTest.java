@@ -31,6 +31,8 @@ public class EllipticTest {
 	static double ripple = 1; // db
 	static double rolloff = 2;
 
+	static String prefix="target/surefire-reports/";
+
 	@Test
 	public void bandPassTest() {
 		Elliptic elliptic = new Elliptic();
@@ -38,7 +40,7 @@ public class EllipticTest {
 
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("bp.txt");
+			os = new FileOutputStream(prefix+"bp.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +69,7 @@ public class EllipticTest {
 
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("bs.txt");
+			os = new FileOutputStream(prefix+"bs.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +98,7 @@ public class EllipticTest {
 
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("lp.txt");
+			os = new FileOutputStream(prefix+"lp.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -125,7 +127,7 @@ public class EllipticTest {
 
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("hp.txt");
+			os = new FileOutputStream(prefix+"hp.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

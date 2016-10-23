@@ -27,6 +27,8 @@ import org.junit.Test;
 // Various impulse responses written out to files so that you can plot them
 public class BesselTest {
 
+	static String prefix="target/surefire-reports/";
+	
 	@Test
 	public void bandPassTest() {
 		Bessel bessel = new Bessel();
@@ -34,7 +36,7 @@ public class BesselTest {
 		
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("bp.txt");
+			os = new FileOutputStream(prefix+"bp.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -62,7 +64,7 @@ public class BesselTest {
 		
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("bs.txt");
+			os = new FileOutputStream(prefix+"bs.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -90,7 +92,7 @@ public class BesselTest {
 		
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("lp.txt");
+			os = new FileOutputStream(prefix+"lp.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -118,7 +120,7 @@ public class BesselTest {
 		
 		FileOutputStream os = null;
 		try {
-			os = new FileOutputStream("hp.txt");
+			os = new FileOutputStream(prefix+"hp.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
