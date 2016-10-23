@@ -50,9 +50,18 @@ public class DetectorTest {
 		}
 		PrintStream bp = new PrintStream(os);
 		
+		FileOutputStream heartrate = null;
+		try {
+			heartrate = new FileOutputStream("hr.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		PrintStream hr = new PrintStream(heartrate);
+		
 		Scanner is = null;
 		try {
-			is = new Scanner(new File("src/test/java/uk/me/berndporr/ecg.dat"));
+			is = new Scanner(new File("src/test/resources/ecg.dat"));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -86,7 +95,7 @@ public class DetectorTest {
 				if (v > 0.5*max) {
 					t1 = time;
 					notDet = 50;
-					System.out.println(""+(t1-t2)*60);
+					hr.println(""+(t1-t2)*60);
 					t2 = t1;
 				}
 			}
@@ -96,7 +105,16 @@ public class DetectorTest {
 			os.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw e;
 		}
+
+		try {
+			heartrate.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw e;
+		}
+
 	}
 	
 	
