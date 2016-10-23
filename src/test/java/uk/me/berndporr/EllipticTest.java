@@ -21,16 +21,18 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.FileOutputStream;
 
-import uk.me.berndporr.iirj.Butterworth;
-
+import uk.me.berndporr.iirj.Elliptic;
 
 // Various impulse responses written out to files so that you can plot them
-public class TestButterworth {
+public class EllipticTest {
+
+	static double ripple = 1; // db
+	static double rolloff = 2;
 
 	static void bandPassTest() {
-		Butterworth butterworth = new Butterworth();
-		butterworth.bandPass(2,250,50,5);
-		
+		Elliptic elliptic = new Elliptic();
+		elliptic.bandPass(2, 250, 50, 5, ripple, rolloff);
+
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream("bp.txt");
@@ -40,11 +42,12 @@ public class TestButterworth {
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for(int i=0;i<500;i++) {
-			double v=0;
-			if (i == 10) v = 1; 
-			v = butterworth.filter(v);
-			bp.println(""+v);
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
+			v = elliptic.filter(v);
+			bp.println("" + v);
 		}
 
 		try {
@@ -53,12 +56,11 @@ public class TestButterworth {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	static void bandStopTest() {
-		Butterworth butterworth = new Butterworth();
-		butterworth.bandStop(2,250,50,5);
-		
+		Elliptic elliptic = new Elliptic();
+		elliptic.bandStop(2, 250, 50, 5, ripple, rolloff);
+
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream("bs.txt");
@@ -68,11 +70,12 @@ public class TestButterworth {
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for(int i=0;i<500;i++) {
-			double v=0;
-			if (i == 10) v = 1; 
-			v = butterworth.filter(v);
-			bp.println(""+v);
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
+			v = elliptic.filter(v);
+			bp.println("" + v);
 		}
 
 		try {
@@ -81,12 +84,11 @@ public class TestButterworth {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	static void lowPassTest() {
-		Butterworth butterworth = new Butterworth();
-		butterworth.lowPass(4,250,50);
-		
+		Elliptic elliptic = new Elliptic();
+		elliptic.lowPass(4, 250, 50, ripple, rolloff);
+
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream("lp.txt");
@@ -96,11 +98,12 @@ public class TestButterworth {
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for(int i=0;i<500;i++) {
-			double v=0;
-			if (i == 10) v = 1; 
-			v = butterworth.filter(v);
-			bp.println(""+v);
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
+			v = elliptic.filter(v);
+			bp.println("" + v);
 		}
 
 		try {
@@ -109,12 +112,11 @@ public class TestButterworth {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	static void highPassTest() {
-		Butterworth butterworth = new Butterworth();
-		butterworth.highPass(4,250,50);
-		
+		Elliptic elliptic = new Elliptic();
+		elliptic.highPass(4, 250, 50, ripple, rolloff);
+
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream("hp.txt");
@@ -124,11 +126,12 @@ public class TestButterworth {
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for(int i=0;i<500;i++) {
-			double v=0;
-			if (i == 10) v = 1; 
-			v = butterworth.filter(v);
-			bp.println(""+v);
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
+			v = elliptic.filter(v);
+			bp.println("" + v);
 		}
 
 		try {
@@ -137,8 +140,7 @@ public class TestButterworth {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public static void main(String args[]) {
 		lowPassTest();
 		highPassTest();

@@ -32,7 +32,7 @@ import uk.me.berndporr.iirj.Butterworth;
 // a bandpass and which in turn could be understood as a wavelet.
 // The center and bandwidth here are experimental results so that the
 // impulse response resembles the timing of an R peak.
-public class TestDetector {
+public class DetectorTest {
 
 	static void bandPassTest() {
 		Butterworth butterworth = new Butterworth();
