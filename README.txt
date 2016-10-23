@@ -3,7 +3,7 @@ iirj
 
 An IIR filter library written in JAVA.
 
-Filters: Butterworth, Bessel and Chebyshev Type I
+Filters: Butterworth, Bessel and Chebyshev Type I/II
 
 It's based on the IIR1 library: https://github.com/berndporr/iir1
 which in turn is based on https://github.com/vinniefalco/DSPFilters
