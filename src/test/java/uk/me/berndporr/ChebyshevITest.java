@@ -16,11 +16,11 @@
  */
 
 
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.FileOutputStream;
+import java.io.File;
 
 import uk.me.berndporr.iirj.ChebyshevI;
 
@@ -28,80 +28,24 @@ import org.junit.Test;
 
 // Various impulse responses written out to files so that you can plot them
 public class ChebyshevITest {
-	
-	static String prefix="target/surefire-reports/";
-	
-	double ripple = 0.1; // db
+
+	static double ripple = 1; // db
+
+	static String prefix="target/surefire-reports/chebyshevI/";
+
+	void createDir() throws Exception {
+		File dir = new File(prefix);
+		dir.mkdirs();
+	}		
 
 	@Test
-	public void bandPassTest() {
-		ChebyshevI chebyshevI = new ChebyshevI();
-		chebyshevI.bandPass(2, 250, 50, 5, ripple);
-
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"bp.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		PrintStream bp = new PrintStream(os);
-
-		// let's do an impulse response
-		for (int i = 0; i < 500; i++) {
-			double v = 0;
-			if (i == 10)
-				v = 1;
-			v = chebyshevI.filter(v);
-			bp.println("" + v);
-		}
-
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void bandStopTest() {
-		ChebyshevI chebyshevI = new ChebyshevI();
-		chebyshevI.bandStop(2, 250, 50, 5, ripple);
-
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"bs.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		PrintStream bp = new PrintStream(os);
-
-		// let's do an impulse response
-		for (int i = 0; i < 500; i++) {
-			double v = 0;
-			if (i == 10)
-				v = 1;
-			v = chebyshevI.filter(v);
-			bp.println("" + v);
-		}
-
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void lowPassTest() {
+	public void lowPassTest() throws Exception {
 		ChebyshevI chebyshevI = new ChebyshevI();
 		chebyshevI.lowPass(4, 250, 50, ripple);
 
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"lp.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		createDir();
+
+		FileOutputStream os = new FileOutputStream(prefix+"lp.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
@@ -113,24 +57,17 @@ public class ChebyshevITest {
 			bp.println("" + v);
 		}
 
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		os.close();
 	}
 
 	@Test
-	public void highPassTest() {
+	public void bandPassTest() throws Exception {
 		ChebyshevI chebyshevI = new ChebyshevI();
-		chebyshevI.highPass(4, 250, 50, ripple);
+		chebyshevI.bandPass(2, 250, 50, 5, ripple);
 
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"hp.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		createDir();
+
+		FileOutputStream os = new FileOutputStream(prefix+"bp.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
@@ -142,18 +79,59 @@ public class ChebyshevITest {
 			bp.println("" + v);
 		}
 
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		os.close();
+	}
+
+	@Test
+	public void bandStopTest() throws Exception {
+		ChebyshevI chebyshevI = new ChebyshevI();
+		chebyshevI.bandStop(2, 250, 50, 5, ripple);
+
+		createDir();
+
+		FileOutputStream os = new FileOutputStream(prefix+"bs.txt");
+		PrintStream bp = new PrintStream(os);
+
+		// let's do an impulse response
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
+			v = chebyshevI.filter(v);
+			bp.println("" + v);
 		}
+
+		os.close();
+	}
+
+	@Test
+	public void highPassTest() throws Exception {
+		ChebyshevI chebyshevI = new ChebyshevI();
+		chebyshevI.highPass(4, 250, 50, ripple);
+
+		createDir();
+		FileOutputStream os = new FileOutputStream(prefix+"hp.txt");
+		PrintStream bp = new PrintStream(os);
+
+		// let's do an impulse response
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
+			v = chebyshevI.filter(v);
+			bp.println("" + v);
+		}
+
+		os.close();
 	}
 
 	public void main(String args[]) {
+		try {
 		lowPassTest();
 		highPassTest();
 		bandPassTest();
 		bandStopTest();
+		} catch (Exception e) {
+		}
 	}
-
 }

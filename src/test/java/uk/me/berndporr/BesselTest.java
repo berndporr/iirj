@@ -15,10 +15,12 @@
  * limitations under the License.
  */
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.FileOutputStream;
+import java.io.File;
 
 import uk.me.berndporr.iirj.Bessel;
 
@@ -27,125 +29,106 @@ import org.junit.Test;
 // Various impulse responses written out to files so that you can plot them
 public class BesselTest {
 
-	static String prefix="target/surefire-reports/";
-	
+	static String prefix="target/surefire-reports/bessel/";
+
+	void createDir() throws Exception {
+		File dir = new File(prefix);
+		dir.mkdirs();
+	}
+
 	@Test
-	public void bandPassTest() {
+	public void lowPassTest() throws Exception {
 		Bessel bessel = new Bessel();
-		bessel.bandPass(4,250,50,5);
-		
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"bp.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		bessel.lowPass(4, 250, 50);
+
+		createDir();
+		FileOutputStream os = new FileOutputStream(prefix+"lp.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for(int i=0;i<500;i++) {
-			double v=0;
-			if (i == 10) v = 1; 
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
 			v = bessel.filter(v);
-			bp.println(""+v);
+			bp.println("" + v);
 		}
 
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		os.close();
 	}
-	
+
 	@Test
-	public void bandStopTest() {
+	public void bandPassTest() throws Exception {
 		Bessel bessel = new Bessel();
-		bessel.bandStop(4,250,50,5);
-		
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"bs.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		bessel.bandPass(2, 250, 50, 5);
+
+		createDir();
+		FileOutputStream os = new FileOutputStream(prefix+"bp.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for(int i=0;i<500;i++) {
-			double v=0;
-			if (i == 10) v = 1; 
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
 			v = bessel.filter(v);
-			bp.println(""+v);
+			bp.println("" + v);
 		}
 
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		os.close();
 	}
-	
+
 	@Test
-	public void lowPassTest() {
+	public void bandStopTest() throws Exception {
+
 		Bessel bessel = new Bessel();
-		bessel.lowPass(4,250,50);
-		
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"lp.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		bessel.bandStop(2, 250, 50, 5);
+
+		createDir();
+		FileOutputStream os = new FileOutputStream(prefix+"bs.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for(int i=0;i<500;i++) {
-			double v=0;
-			if (i == 10) v = 1; 
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
 			v = bessel.filter(v);
-			bp.println(""+v);
+			bp.println("" + v);
 		}
 
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		os.close();
 	}
-	
+
 	@Test
-	public void highPassTest() {
+	public void highPassTest() throws Exception {
+
 		Bessel bessel = new Bessel();
-		bessel.highPass(4,250,50);
-		
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"hp.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		bessel.highPass(4, 250, 50);
+
+		createDir();
+		FileOutputStream os = new FileOutputStream(prefix+"hp.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for(int i=0;i<500;i++) {
-			double v=0;
-			if (i == 10) v = 1; 
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
 			v = bessel.filter(v);
-			bp.println(""+v);
+			bp.println("" + v);
 		}
 
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		os.close();
 	}
-	
+
 	public void main(String args[]) {
+		try {
 		lowPassTest();
 		highPassTest();
 		bandPassTest();
 		bandStopTest();
+		} catch (Exception e) {
+		}
 	}
-
 }

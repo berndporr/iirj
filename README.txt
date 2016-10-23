@@ -14,6 +14,8 @@ Dependencies
 You need the Apache Commons Math libraries from here:
 http://commons.apache.org/proper/commons-math/index.html
 
+maven is used as a built system
+
 Usage
 -----
 For example the Butterworth filter:
@@ -49,7 +51,18 @@ filter parameters and see the effects.
 
 Installation
 ------------
-It uses maven so just run: "mvn package" or "mvn install".
+Just run: "mvn package" or "mvn install".
+
+Testing
+-------
+Run: "mvn test"
+this will create impulse responses in subdirectories
+in: 'target/surefire-reports'. Then install octave, copy
+the script 'src/test/resources/filtertest.m' in these
+subdirectories and run it from there. You should see the
+different frequency reponses of these filters. You can try
+out different filter parameters by modifiing the test
+scripts and re-run 'mvn test'.
 
 Have fun
 

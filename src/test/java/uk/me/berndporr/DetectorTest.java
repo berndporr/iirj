@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.FileOutputStream;
+import java.io.File;
 import java.util.Scanner;
 
 import uk.me.berndporr.iirj.Butterworth;
@@ -35,38 +36,29 @@ import org.junit.Test;
 // impulse response resembles the timing of an R peak.
 public class DetectorTest {
 
-	static String prefix="target/surefire-reports/";
+	static String prefix="target/surefire-reports/detector/";
+
+	void createDir() {
+		File dir = new File(prefix);
+		dir.mkdirs();
+	}		
+
 
 	@Test
 	public void detTest() throws Exception {
+		createDir();
+		
 		Butterworth butterworth = new Butterworth();
 		// this fakes an R peak so we have a matched filter!
 		butterworth.bandPass(2,250,20,15);
 		
-		FileOutputStream os = null;
-		try {
-			os = new FileOutputStream(prefix+"det.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			throw e;
-		}
+		FileOutputStream os = new FileOutputStream(prefix+"det.txt");
 		PrintStream bp = new PrintStream(os);
 		
-		FileOutputStream heartrate = null;
-		try {
-			heartrate = new FileOutputStream(prefix+"hr.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			throw e;
-		}
+		FileOutputStream heartrate = new FileOutputStream(prefix+"hr.txt");
 		PrintStream hr = new PrintStream(heartrate);
 		
-		Scanner is = null;
-		try {
-			is = new Scanner(new File("src/test/resources/ecg.dat"));
-		} catch (Exception e) {
-			throw e;
-		}
+		Scanner is = new Scanner(new File("src/test/resources/ecg.dat"));
 		
 		double max = 0;
 		double t1=0,t2=0;
@@ -79,7 +71,6 @@ public class DetectorTest {
 			double v=0;
 			time = time + 1.0/125.0;
 			String data = is.nextLine();
-			//System.out.println(data);
 			v = Double.parseDouble(data);
 			v = butterworth.filter(v);
 			v = v*v;
@@ -103,25 +94,17 @@ public class DetectorTest {
 			}
 		}
 
-		try {
-			os.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		}
-
-		try {
-			heartrate.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		}
+		os.close();
+		heartrate.close();
+		is.close();
 
 	}
 	
 	
-	public void main(String args[]) throws Exception {
+	public void main(String args[]) {
+		try {
 		detTest();
+		} catch (Exception e) {};
 	}
 
 }
