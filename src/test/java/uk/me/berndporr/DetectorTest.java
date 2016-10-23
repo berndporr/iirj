@@ -88,7 +88,9 @@ public class DetectorTest {
 				if (v > 0.5*max) {
 					t1 = time;
 					notDet = 50;
-					hr.println(""+(t1-t2)*60);
+					long r = Math.round((t1-t2)*60);
+					if (r>30) 
+						hr.println(""+r);
 					t2 = t1;
 				}
 			}

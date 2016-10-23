@@ -57,12 +57,17 @@ Testing
 -------
 Run: "mvn test"
 this will create impulse responses in subdirectories
-in: 'target/surefire-reports'. Then install octave, copy
-the script 'src/test/resources/filtertest.m' in these
-subdirectories and run it from there. You should see the
+for the filters implemented in: 'target/surefire-reports'.
+Then install octave, copy the script
+'src/test/resources/filtertest.m'
+in these subdirectories and run it from there. You should see the
 different frequency reponses of these filters. You can try
 out different filter parameters by modifiing the test
 scripts and re-run 'mvn test'.
+The script DetectorTest uses a bandpass filter to detect the
+heartbeats of an ECG recording faking a matched filter which could
+be also seen as a 1st approximation of a wavelet. The heartrate is
+stored in hr.txt.
 
 Have fun
 
