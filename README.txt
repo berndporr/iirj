@@ -47,6 +47,10 @@ filters to text files which you can then plot with
 the octave script filtertest.m Also very useful to tweak the
 filter parameters and see the effects.
 
+Installation
+------------
+It uses maven so just run: "mvn package" or "mvn install".
+
 Have fun
 
 /Bernd Porr
