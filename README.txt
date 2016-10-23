@@ -51,7 +51,7 @@ filter parameters and see the effects.
 
 Installation
 ------------
-Just run: "mvn package" or "mvn install".
+Just run: "mvn install" to add it to your local maven respository.
 
 Testing
 -------
