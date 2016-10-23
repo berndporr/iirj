@@ -53,6 +53,10 @@ Installation
 ------------
 Just run: "mvn install" to add it to your local maven respository.
 
+Documentation
+-------------
+Run: "mvn javadoc:javadoc" to generate the JavaDoc
+
 Testing
 -------
 Run: "mvn test"
