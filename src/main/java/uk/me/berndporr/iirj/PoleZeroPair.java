@@ -1,3 +1,5 @@
+package uk.me.berndporr.iirj;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,26 +20,36 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iir;
-
-
 import org.apache.commons.math3.complex.Complex;
 
 /**
- * Created by bp1 on 03/10/16.
+ * 
+ * It's written on the tin.
+ *
  */
-public class BiquadPoleState extends PoleZeroPair {
+public class PoleZeroPair {
 
+	ComplexPair poles;
+	ComplexPair zeros;
 
-    BiquadPoleState(Complex p, Complex z) {
-        super(p, z);
-    }
+	// single pole/zero
+	PoleZeroPair(Complex p, Complex z) {
+		poles = new ComplexPair(p);
+		zeros = new ComplexPair(z);
+	}
 
-    BiquadPoleState(Complex p1, Complex z1,
-                    Complex p2, Complex z2) {
-        super(p1, z1, p2, z2);
-    }
+	// pole/zero pair
+	PoleZeroPair(Complex p1, Complex z1, Complex p2, Complex z2) {
+		poles = new ComplexPair(p1, p2);
+		zeros = new ComplexPair(z1, z2);
+	}
 
-    double gain;
+	boolean isSinglePole() {
+		return poles.second.equals(new Complex(0, 0))
+				&& zeros.second.equals(new Complex(0, 0));
+	}
 
-}
+	boolean is_nan() {
+		return poles.is_nan() || zeros.is_nan();
+	}
+};

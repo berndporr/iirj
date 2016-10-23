@@ -1,5 +1,3 @@
-package uk.me.berndporr.iir;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -20,36 +18,41 @@ package uk.me.berndporr.iir;
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-import org.apache.commons.math3.complex.Complex;
+package uk.me.berndporr.iirj;
 
 /**
  * 
- * It's written on the tin.
+ * Implementation of a Direct Form I filter with its states. The coefficients
+ * are supplied from the outside.
  *
  */
-public class PoleZeroPair {
+public class DirectFormI extends DirectFormAbstract {
 
-	ComplexPair poles;
-	ComplexPair zeros;
+    public DirectFormI() {
+        reset();
+    }
 
-	// single pole/zero
-	PoleZeroPair(Complex p, Complex z) {
-		poles = new ComplexPair(p);
-		zeros = new ComplexPair(z);
-	}
+    public void reset() {
+        m_x1 = 0;
+        m_x2 = 0;
+        m_y1 = 0;
+        m_y2 = 0;
+    }
 
-	// pole/zero pair
-	PoleZeroPair(Complex p1, Complex z1, Complex p2, Complex z2) {
-		poles = new ComplexPair(p1, p2);
-		zeros = new ComplexPair(z1, z2);
-	}
+    public double process1(double in, Biquad s) {
 
-	boolean isSinglePole() {
-		return poles.second.equals(new Complex(0, 0))
-				&& zeros.second.equals(new Complex(0, 0));
-	}
+        double out = s.m_b0 * in + s.m_b1 * m_x1 + s.m_b2 * m_x2
+                - s.m_a1 * m_y1 - s.m_a2 * m_y2;
+        m_x2 = m_x1;
+        m_y2 = m_y1;
+        m_x1 = in;
+        m_y1 = out;
 
-	boolean is_nan() {
-		return poles.is_nan() || zeros.is_nan();
-	}
+        return out;
+    }
+
+    double m_x2; // x[n-2]
+    double m_y2; // y[n-2]
+    double m_x1; // x[n-1]
+    double m_y1; // y[n-1]
 };

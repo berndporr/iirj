@@ -1,4 +1,4 @@
-package uk.me.berndporr.iir;
+package uk.me.berndporr.iirj;
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -21,7 +21,7 @@ import java.io.PrintStream;
 import java.io.FileOutputStream;
 import java.io.File;
 
-import uk.me.berndporr.iir.ChebyshevI;
+import uk.me.berndporr.iirj.ChebyshevI;
 
 import org.junit.Test;
 
