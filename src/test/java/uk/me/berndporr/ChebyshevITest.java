@@ -29,7 +29,7 @@ import org.junit.Test;
 // Various impulse responses written out to files so that you can plot them
 public class ChebyshevITest {
 
-	static double ripple = 1; // db
+	static double ripple = 0.1; // db
 
 	static String prefix="target/surefire-reports/chebyshevI/";
 
