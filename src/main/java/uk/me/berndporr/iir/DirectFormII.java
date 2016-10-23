@@ -18,41 +18,41 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
+package uk.me.berndporr.iir;
 
 /**
  * 
- * Implementation of a Direct Form I filter with its states. The coefficients
+ * Implementation of a Direct Form II filter with its states. The coefficients
  * are supplied from the outside.
  *
  */
-public class DirectFormI extends DirectFormAbstract {
 
-    public DirectFormI() {
+public class DirectFormII extends DirectFormAbstract {
+
+    public DirectFormII() {
         reset();
     }
 
     public void reset() {
-        m_x1 = 0;
-        m_x2 = 0;
-        m_y1 = 0;
-        m_y2 = 0;
+        m_v1 = 0;
+        m_v2 = 0;
     }
 
-    public double process1(double in, Biquad s) {
+    public double process1(double in,
+                    Biquad s) {
+    	if (s != null) {
+        double w = in - s.m_a1 * m_v1 - s.m_a2 * m_v2;
+        double out = s.m_b0 * w + s.m_b1 * m_v1 + s.m_b2 * m_v2;
 
-        double out = s.m_b0 * in + s.m_b1 * m_x1 + s.m_b2 * m_x2
-                - s.m_a1 * m_y1 - s.m_a2 * m_y2;
-        m_x2 = m_x1;
-        m_y2 = m_y1;
-        m_x1 = in;
-        m_y1 = out;
+        m_v2 = m_v1;
+        m_v1 = w;
 
         return out;
+    	} else {
+    		return in;
+    	}
     }
 
-    double m_x2; // x[n-2]
-    double m_y2; // y[n-2]
-    double m_x1; // x[n-1]
-    double m_y1; // y[n-1]
-};
+    double m_v1; // v[-1]
+    double m_v2; // v[-2]
+}

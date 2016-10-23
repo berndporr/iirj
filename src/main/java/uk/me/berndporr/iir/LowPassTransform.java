@@ -19,7 +19,7 @@
  */
 
 
-package uk.me.berndporr.iirj;
+package uk.me.berndporr.iir;
 
 import org.apache.commons.math3.complex.Complex;
 

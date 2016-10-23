@@ -1,5 +1,3 @@
-package uk.me.berndporr.iirj;
-
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -20,83 +18,51 @@ package uk.me.berndporr.iirj;
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-import org.apache.commons.math3.analysis.solvers.LaguerreSolver;
+
+package uk.me.berndporr.iir;
+
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.complex.ComplexUtils;
 
 /**
- * User facing class which contains all the methods the user uses to create
- * Bessel filters. This done in this way: Bessel bessel = new Bessel(); Then
- * call one of the methods below to create low-,high-,band-, or stopband
- * filters. For example: bessel.bandPass(2,250,50,5);
+ *         User facing class which contains all the methods the user uses
+ *         to create Butterworth filters. This done in this way:
+ *         Butterworth butterworth = new Butterworth(); 
+ *         Then call one of the methods below to create
+ *         low-,high-,band-, or stopband filters. For example:
+ *         butterworth.bandPass(2,250,50,5);
  */
-public class Bessel extends Cascade {
-
-	// returns fact(n) = n!
-	double fact(int n) {
-		if (n == 0)
-			return 1;
-
-		double y = n;
-		for (double m = n-1; m > 0; m--)
-			y = y * m;
-		
-		return y;
-	}
+public class Butterworth extends Cascade {
 
 	class AnalogLowPass extends LayoutBase {
 
-		int degree;
-		
-		double[] m_a;
-		Complex[] m_root;
+		int nPoles;
 
-		// returns the k-th zero based coefficient of the reverse bessel
-		// polynomial of degree n
-		double reversebessel(int k, int n) {
-			double result = fact(2 * n - k)
-					/ ((fact(n - k) * fact(k)) * Math.pow(2., n - k));
-			return result;
-		}
-
-		// ------------------------------------------------------------------------------
-
-		AnalogLowPass(int _degree) {
-			super(_degree);
-			degree = _degree;
-			m_a   = new double[degree + 1]; // input coefficients (degree+1 elements)
-			m_root = new Complex[degree]; // array of roots (degree elements)
-			setNormal(0, 1);			
+		AnalogLowPass(int _nPoles) {
+			super(_nPoles);
+			nPoles = _nPoles;
+			setNormal(0, 1);
 		}
 
 		void design() {
 			reset();
-
-			for (int i = 0; i < degree + 1; ++i) {
-				m_a[i] = reversebessel(i, degree);
-			}
-				
-			LaguerreSolver laguerreSolver = new LaguerreSolver();
-			
-			m_root = laguerreSolver.solveAllComplex(m_a,0.0);
-			
-			Complex inf = Complex.INF;
-			int pairs = degree / 2;
+			double n2 = 2 * nPoles;
+			int pairs = nPoles / 2;
 			for (int i = 0; i < pairs; ++i) {
-				Complex c = m_root[i];
-				addPoleZeroConjugatePairs(c, inf);
+				Complex c = ComplexUtils.polar2Complex(1F, Math.PI
+						+ (2 * i + 1) * Math.PI / n2);
+				addPoleZeroConjugatePairs(c, Complex.INF);
 			}
 
-			if ((degree & 1) == 1)
-				add(new Complex(m_root[pairs].getReal()), inf);
+			if ((nPoles & 1) == 1)
+				add(new Complex(-1), Complex.INF);
 		}
-
 	}
 
 	private void setupLowPass(int order, double sampleRate,
 			double cutoffFrequency, int directFormType) {
 
 		AnalogLowPass m_analogProto = new AnalogLowPass(order);
-
 		m_analogProto.design();
 
 		LayoutBase m_digitalProto = new LayoutBase(order);
@@ -108,7 +74,7 @@ public class Bessel extends Cascade {
 	}
 
 	/**
-	 * Bessel Lowpass filter with default topology
+	 * Butterworth Lowpass filter with default topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -123,7 +89,7 @@ public class Bessel extends Cascade {
 	}
 
 	/**
-	 * Bessel Lowpass filter with custom topology
+	 * Butterworth Lowpass filter with custom topology
 	 * 
 	 * @param order
 	 *            The order of the filter
@@ -140,6 +106,9 @@ public class Bessel extends Cascade {
 		setupLowPass(order, sampleRate, cutoffFrequency, directFormType);
 	}
 
+	
+	
+	
 	private void setupHighPass(int order, double sampleRate,
 			double cutoffFrequency, int directFormType) {
 
@@ -186,6 +155,9 @@ public class Bessel extends Cascade {
 				DirectFormAbstract.DIRECT_FORM_II);
 	}
 
+	
+	
+	
 	private void setupBandStop(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, int directFormType) {
 
@@ -238,6 +210,9 @@ public class Bessel extends Cascade {
 				directFormType);
 	}
 
+	
+	
+	
 	private void setupBandPass(int order, double sampleRate,
 			double centerFrequency, double widthFrequency, int directFormType) {
 

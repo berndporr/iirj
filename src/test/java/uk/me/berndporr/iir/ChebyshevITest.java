@@ -1,3 +1,4 @@
+package uk.me.berndporr.iir;
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -16,20 +17,20 @@
  */
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.io.FileOutputStream;
 import java.io.File;
 
-import uk.me.berndporr.iirj.Butterworth;
+import uk.me.berndporr.iir.ChebyshevI;
 
 import org.junit.Test;
 
 // Various impulse responses written out to files so that you can plot them
-public class ButterworthTest {
+public class ChebyshevITest {
 
-	static String prefix="target/surefire-reports/butterworth/";
+	static double ripple = 0.1; // db
+
+	static String prefix="target/surefire-reports/chebyshevI/";
 
 	void createDir() throws Exception {
 		File dir = new File(prefix);
@@ -38,11 +39,11 @@ public class ButterworthTest {
 
 	@Test
 	public void lowPassTest() throws Exception {
-
-		Butterworth butterworth = new Butterworth();
-		butterworth.lowPass(4, 250, 50);
+		ChebyshevI chebyshevI = new ChebyshevI();
+		chebyshevI.lowPass(4, 250, 50, ripple);
 
 		createDir();
+
 		FileOutputStream os = new FileOutputStream(prefix+"lp.txt");
 		PrintStream bp = new PrintStream(os);
 
@@ -51,7 +52,7 @@ public class ButterworthTest {
 			double v = 0;
 			if (i == 10)
 				v = 1;
-			v = butterworth.filter(v);
+			v = chebyshevI.filter(v);
 			bp.println("" + v);
 		}
 
@@ -60,10 +61,11 @@ public class ButterworthTest {
 
 	@Test
 	public void bandPassTest() throws Exception {
-		Butterworth butterworth = new Butterworth();
-		butterworth.bandPass(2, 250, 50, 5);
+		ChebyshevI chebyshevI = new ChebyshevI();
+		chebyshevI.bandPass(2, 250, 50, 5, ripple);
 
 		createDir();
+
 		FileOutputStream os = new FileOutputStream(prefix+"bp.txt");
 		PrintStream bp = new PrintStream(os);
 
@@ -72,7 +74,7 @@ public class ButterworthTest {
 			double v = 0;
 			if (i == 10)
 				v = 1;
-			v = butterworth.filter(v);
+			v = chebyshevI.filter(v);
 			bp.println("" + v);
 		}
 
@@ -81,10 +83,11 @@ public class ButterworthTest {
 
 	@Test
 	public void bandStopTest() throws Exception {
-		Butterworth butterworth = new Butterworth();
-		butterworth.bandStop(2, 250, 50, 5);
+		ChebyshevI chebyshevI = new ChebyshevI();
+		chebyshevI.bandStop(2, 250, 50, 5, ripple);
 
 		createDir();
+
 		FileOutputStream os = new FileOutputStream(prefix+"bs.txt");
 		PrintStream bp = new PrintStream(os);
 
@@ -93,7 +96,7 @@ public class ButterworthTest {
 			double v = 0;
 			if (i == 10)
 				v = 1;
-			v = butterworth.filter(v);
+			v = chebyshevI.filter(v);
 			bp.println("" + v);
 		}
 
@@ -102,8 +105,8 @@ public class ButterworthTest {
 
 	@Test
 	public void highPassTest() throws Exception {
-		Butterworth butterworth = new Butterworth();
-		butterworth.highPass(4, 250, 50);
+		ChebyshevI chebyshevI = new ChebyshevI();
+		chebyshevI.highPass(4, 250, 50, ripple);
 
 		createDir();
 		FileOutputStream os = new FileOutputStream(prefix+"hp.txt");
@@ -114,7 +117,7 @@ public class ButterworthTest {
 			double v = 0;
 			if (i == 10)
 				v = 1;
-			v = butterworth.filter(v);
+			v = chebyshevI.filter(v);
 			bp.println("" + v);
 		}
 

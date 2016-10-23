@@ -1,3 +1,4 @@
+package uk.me.berndporr.iir;
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -16,13 +17,11 @@
  */
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.io.FileOutputStream;
 import java.io.File;
 
-import uk.me.berndporr.iirj.Bessel;
+import uk.me.berndporr.iir.Bessel;
 
 import org.junit.Test;
 

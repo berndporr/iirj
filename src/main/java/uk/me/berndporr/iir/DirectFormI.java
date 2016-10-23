@@ -18,24 +18,41 @@
  *  Copyright (c) 2016 by Bernd Porr
  */
 
-package uk.me.berndporr.iirj;
+package uk.me.berndporr.iir;
 
 /**
- * Abstract form of the a filter which can have different state variables
+ * 
+ * Implementation of a Direct Form I filter with its states. The coefficients
+ * are supplied from the outside.
  *
- * Direct form I or II is derived from it
  */
-public abstract class DirectFormAbstract {
+public class DirectFormI extends DirectFormAbstract {
 
-    public DirectFormAbstract () {
+    public DirectFormI() {
         reset();
     }
 
-    public abstract void reset();
+    public void reset() {
+        m_x1 = 0;
+        m_x2 = 0;
+        m_y1 = 0;
+        m_y2 = 0;
+    }
 
-    public abstract double process1 (double in, Biquad s);
+    public double process1(double in, Biquad s) {
 
-    public static final int DIRECT_FORM_I = 0;
-    public static final int DIRECT_FORM_II = 1;
+        double out = s.m_b0 * in + s.m_b1 * m_x1 + s.m_b2 * m_x2
+                - s.m_a1 * m_y1 - s.m_a2 * m_y2;
+        m_x2 = m_x1;
+        m_y2 = m_y1;
+        m_x1 = in;
+        m_y1 = out;
 
+        return out;
+    }
+
+    double m_x2; // x[n-2]
+    double m_y2; // y[n-2]
+    double m_x1; // x[n-1]
+    double m_y1; // y[n-1]
 };

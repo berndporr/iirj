@@ -1,4 +1,4 @@
-package uk.me.berndporr.iirj;
+package uk.me.berndporr.iir;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
