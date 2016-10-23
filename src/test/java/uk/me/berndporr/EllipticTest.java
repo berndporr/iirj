@@ -23,13 +23,16 @@ import java.io.FileOutputStream;
 
 import uk.me.berndporr.iirj.Elliptic;
 
+import org.junit.Test;
+
 // Various impulse responses written out to files so that you can plot them
 public class EllipticTest {
 
 	static double ripple = 1; // db
 	static double rolloff = 2;
 
-	static void bandPassTest() {
+	@Test
+	public void bandPassTest() {
 		Elliptic elliptic = new Elliptic();
 		elliptic.bandPass(2, 250, 50, 5, ripple, rolloff);
 
@@ -57,7 +60,8 @@ public class EllipticTest {
 		}
 	}
 
-	static void bandStopTest() {
+	@Test
+	public void bandStopTest() {
 		Elliptic elliptic = new Elliptic();
 		elliptic.bandStop(2, 250, 50, 5, ripple, rolloff);
 
@@ -85,7 +89,8 @@ public class EllipticTest {
 		}
 	}
 
-	static void lowPassTest() {
+	@Test
+	public void lowPassTest() {
 		Elliptic elliptic = new Elliptic();
 		elliptic.lowPass(4, 250, 50, ripple, rolloff);
 
@@ -113,7 +118,8 @@ public class EllipticTest {
 		}
 	}
 
-	static void highPassTest() {
+	@Test
+	public void highPassTest() {
 		Elliptic elliptic = new Elliptic();
 		elliptic.highPass(4, 250, 50, ripple, rolloff);
 
@@ -141,7 +147,7 @@ public class EllipticTest {
 		}
 	}
 
-	public static void main(String args[]) {
+	public void main(String args[]) {
 		lowPassTest();
 		highPassTest();
 		bandPassTest();

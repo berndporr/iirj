@@ -22,11 +22,13 @@ import java.io.FileOutputStream;
 
 import uk.me.berndporr.iirj.Bessel;
 
+import org.junit.Test;
 
 // Various impulse responses written out to files so that you can plot them
 public class BesselTest {
 
-	static void bandPassTest() {
+	@Test
+	public void bandPassTest() {
 		Bessel bessel = new Bessel();
 		bessel.bandPass(4,250,50,5);
 		
@@ -53,8 +55,8 @@ public class BesselTest {
 		}
 	}
 	
-	
-	static void bandStopTest() {
+	@Test
+	public void bandStopTest() {
 		Bessel bessel = new Bessel();
 		bessel.bandStop(4,250,50,5);
 		
@@ -81,8 +83,8 @@ public class BesselTest {
 		}
 	}
 	
-	
-	static void lowPassTest() {
+	@Test
+	public void lowPassTest() {
 		Bessel bessel = new Bessel();
 		bessel.lowPass(4,250,50);
 		
@@ -109,8 +111,8 @@ public class BesselTest {
 		}
 	}
 	
-	
-	static void highPassTest() {
+	@Test
+	public void highPassTest() {
 		Bessel bessel = new Bessel();
 		bessel.highPass(4,250,50);
 		
@@ -137,8 +139,7 @@ public class BesselTest {
 		}
 	}
 	
-	
-	public static void main(String args[]) {
+	public void main(String args[]) {
 		lowPassTest();
 		highPassTest();
 		bandPassTest();

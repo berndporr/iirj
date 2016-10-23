@@ -26,6 +26,7 @@ import java.util.Scanner;
 
 import uk.me.berndporr.iirj.Butterworth;
 
+import org.junit.Test;
 
 // Detect the heartbeat in an ECG
 // The idea is to create a matched filter for ECG which in turn is
@@ -34,7 +35,8 @@ import uk.me.berndporr.iirj.Butterworth;
 // impulse response resembles the timing of an R peak.
 public class DetectorTest {
 
-	static void bandPassTest() {
+	@Test
+	public void detTest() throws Exception {
 		Butterworth butterworth = new Butterworth();
 		// this fakes an R peak so we have a matched filter!
 		butterworth.bandPass(2,250,20,15);
@@ -44,13 +46,16 @@ public class DetectorTest {
 			os = new FileOutputStream("det.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			throw e;
 		}
 		PrintStream bp = new PrintStream(os);
 		
 		Scanner is = null;
 		try {
-			is = new Scanner(new File("ecg.dat"));
-		} catch (Exception e) {}
+			is = new Scanner(new File("src/test/java/uk/me/berndporr/ecg.dat"));
+		} catch (Exception e) {
+			throw e;
+		}
 		
 		double max = 0;
 		double t1=0,t2=0;
@@ -95,8 +100,8 @@ public class DetectorTest {
 	}
 	
 	
-	public static void main(String args[]) {
-		bandPassTest();
+	public void main(String args[]) throws Exception {
+		detTest();
 	}
 
 }

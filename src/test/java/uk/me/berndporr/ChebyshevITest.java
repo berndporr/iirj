@@ -24,12 +24,15 @@ import java.io.FileOutputStream;
 
 import uk.me.berndporr.iirj.ChebyshevI;
 
+import org.junit.Test;
+
 // Various impulse responses written out to files so that you can plot them
 public class ChebyshevITest {
 
-	static double ripple = 0.1; // db
+	double ripple = 0.1; // db
 
-	static void bandPassTest() {
+	@Test
+	public void bandPassTest() {
 		ChebyshevI chebyshevI = new ChebyshevI();
 		chebyshevI.bandPass(2, 250, 50, 5, ripple);
 
@@ -57,7 +60,8 @@ public class ChebyshevITest {
 		}
 	}
 
-	static void bandStopTest() {
+	@Test
+	public void bandStopTest() {
 		ChebyshevI chebyshevI = new ChebyshevI();
 		chebyshevI.bandStop(2, 250, 50, 5, ripple);
 
@@ -85,7 +89,8 @@ public class ChebyshevITest {
 		}
 	}
 
-	static void lowPassTest() {
+	@Test
+	public void lowPassTest() {
 		ChebyshevI chebyshevI = new ChebyshevI();
 		chebyshevI.lowPass(4, 250, 50, ripple);
 
@@ -113,7 +118,8 @@ public class ChebyshevITest {
 		}
 	}
 
-	static void highPassTest() {
+	@Test
+	public void highPassTest() {
 		ChebyshevI chebyshevI = new ChebyshevI();
 		chebyshevI.highPass(4, 250, 50, ripple);
 
@@ -141,7 +147,7 @@ public class ChebyshevITest {
 		}
 	}
 
-	public static void main(String args[]) {
+	public void main(String args[]) {
 		lowPassTest();
 		highPassTest();
 		bandPassTest();

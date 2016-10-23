@@ -23,11 +23,13 @@ import java.io.FileOutputStream;
 
 import uk.me.berndporr.iirj.Butterworth;
 
+import org.junit.Test;
 
 // Various impulse responses written out to files so that you can plot them
 public class ButterworthTest {
 
-	static void bandPassTest() {
+	@Test
+	public void bandPassTest() {
 		Butterworth butterworth = new Butterworth();
 		butterworth.bandPass(2,250,50,5);
 		
@@ -54,8 +56,8 @@ public class ButterworthTest {
 		}
 	}
 	
-	
-	static void bandStopTest() {
+	@Test
+	public void bandStopTest() {
 		Butterworth butterworth = new Butterworth();
 		butterworth.bandStop(2,250,50,5);
 		
@@ -82,8 +84,8 @@ public class ButterworthTest {
 		}
 	}
 	
-	
-	static void lowPassTest() {
+	@Test
+	public void lowPassTest() {
 		Butterworth butterworth = new Butterworth();
 		butterworth.lowPass(4,250,50);
 		
@@ -110,8 +112,8 @@ public class ButterworthTest {
 		}
 	}
 	
-	
-	static void highPassTest() {
+	@Test
+	public void highPassTest() {
 		Butterworth butterworth = new Butterworth();
 		butterworth.highPass(4,250,50);
 		
@@ -139,7 +141,7 @@ public class ButterworthTest {
 	}
 	
 	
-	public static void main(String args[]) {
+	public void main(String args[]) {
 		lowPassTest();
 		highPassTest();
 		bandPassTest();
