@@ -23,6 +23,7 @@ import java.io.File;
 
 import uk.me.berndporr.iirj.ChebyshevI;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 // Various impulse responses written out to files so that you can plot them
@@ -55,6 +56,9 @@ public class ChebyshevITest {
 			v = chebyshevI.filter(v);
 			bp.println("" + v);
 		}
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))<1E-49);
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))!=Double.NaN);
 
 		os.close();
 	}
@@ -77,6 +81,9 @@ public class ChebyshevITest {
 			v = chebyshevI.filter(v);
 			bp.println("" + v);
 		}
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))<1E-15);
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))!=Double.NaN);
 
 		os.close();
 	}
@@ -99,6 +106,9 @@ public class ChebyshevITest {
 			v = chebyshevI.filter(v);
 			bp.println("" + v);
 		}
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))<1E-5);
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))!=Double.NaN);
 
 		os.close();
 	}
@@ -120,6 +130,9 @@ public class ChebyshevITest {
 			v = chebyshevI.filter(v);
 			bp.println("" + v);
 		}
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))<1E-44);
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(chebyshevI.filter(0))!=Double.NaN);
 
 		os.close();
 	}

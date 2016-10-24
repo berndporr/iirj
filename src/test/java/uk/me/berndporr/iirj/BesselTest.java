@@ -23,6 +23,7 @@ import java.io.File;
 
 import uk.me.berndporr.iirj.Bessel;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 // Various impulse responses written out to files so that you can plot them
@@ -52,6 +53,9 @@ public class BesselTest {
 			v = bessel.filter(v);
 			bp.println("" + v);
 		}
+		Assert.assertTrue(Math.abs(bessel.filter(0))<1E-90);
+		Assert.assertTrue(Math.abs(bessel.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(bessel.filter(0))!=Double.NaN);
 
 		os.close();
 	}
@@ -73,6 +77,9 @@ public class BesselTest {
 			v = bessel.filter(v);
 			bp.println("" + v);
 		}
+		Assert.assertTrue(Math.abs(bessel.filter(0))<1E-20);
+		Assert.assertTrue(Math.abs(bessel.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(bessel.filter(0))!=Double.NaN);
 
 		os.close();
 	}
@@ -95,6 +102,9 @@ public class BesselTest {
 			v = bessel.filter(v);
 			bp.println("" + v);
 		}
+		Assert.assertTrue(Math.abs(bessel.filter(0))<1E-7);
+		Assert.assertTrue(Math.abs(bessel.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(bessel.filter(0))!=Double.NaN);
 
 		os.close();
 	}
@@ -117,6 +127,9 @@ public class BesselTest {
 			v = bessel.filter(v);
 			bp.println("" + v);
 		}
+		Assert.assertTrue(Math.abs(bessel.filter(0))<1E-50);
+		Assert.assertTrue(Math.abs(bessel.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(bessel.filter(0))!=Double.NaN);
 
 		os.close();
 	}

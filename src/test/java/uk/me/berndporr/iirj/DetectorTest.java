@@ -25,6 +25,7 @@ import java.util.Scanner;
 
 import uk.me.berndporr.iirj.Butterworth;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 // Detect the heartbeat in an ECG
@@ -87,8 +88,10 @@ public class DetectorTest {
 					t1 = time;
 					notDet = 50;
 					long r = Math.round((t1-t2)*60);
-					if (r>30) 
+					if (r>30) {
 						hr.println(""+r);
+						Assert.assertTrue((r>59)&&(r<81));
+					}
 					t2 = t1;
 				}
 			}
