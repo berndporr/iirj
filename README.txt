@@ -18,6 +18,8 @@ maven is used as a built system
 
 Usage
 -----
+import uk.me.berndporr.iirj.*;
+
 For example the Butterworth filter:
 
 1) Init
@@ -52,6 +54,13 @@ filter parameters and see the effects.
 Installation
 ------------
 Just run: "mvn install" to add it to your local maven respository.
+
+Android Studio
+--------------
+dependencies {
+    compile group: 'uk.me.berndporr', name:'iirj', version: '1.0.0-RC1'
+    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+}
 
 Documentation
 -------------
