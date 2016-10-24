@@ -49,3 +49,5 @@ fx = linspace(0,250,length(lp));
 subplot(2,2,4);
 plot(fx,fy);
 axis([ 0 125 0 1]);
+
+print 'filtertest.png'
