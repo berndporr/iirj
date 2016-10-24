@@ -44,9 +44,9 @@ v = butterworth.filter(v)
 
 Coding examples
 ---------------
-See the Test*.java files for complete examples.
-You can run them easily from eclipse or the commandline.
-These test programs write the different impulse responses of the
+See the *Test.java files for complete examples. Run them with
+"mvn test"
+These test programs write different impulse responses of
 filters to text files which you can then plot with
 the octave script filtertest.m Also very useful to tweak the
 filter parameters and see the effects.
