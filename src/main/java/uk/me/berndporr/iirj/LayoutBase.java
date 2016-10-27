@@ -42,7 +42,11 @@ public class LayoutBase {
 
 	LayoutBase(int numPoles) {
 		m_numPoles = 0;
-		m_pair = new PoleZeroPair[numPoles / 2];
+		if ((numPoles % 2) == 1) {
+			m_pair = new PoleZeroPair[numPoles / 2 + 1];
+		} else {
+			m_pair = new PoleZeroPair[numPoles / 2];
+		}
 	}
 
 	void reset() {
