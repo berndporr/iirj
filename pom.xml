@@ -1,27 +1,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>A selection of standard IIR filters such as Butterworth, Bessel and Chebyshev which
+  are set up with a single command and then can be used for realtime processing: outsample = filter(insample).
+  </description>
+  <url>https://github.com/berndporr/iirj</url>
+  <groupId>uk.me.berndporr</groupId>
+  <artifactId>iirj</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0</version>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>uk.me.berndporr</groupId>
-  <artifactId>iirj</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0.0-RC1</version>
-  <name>iirj</name>
-  <url>http://maven.apache.org</url>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-math3</artifactId>
       <version>3.6.1</version>
     </dependency>
-  <dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
-  </dependency>
+    </dependency>
   </dependencies>
+
+  <developers>
+    <developer>
+      <name>Bernd Porr</name>
+      <email>mail@berndporr.me.uk</email>
+      <organizationUrl>http://www.berndporr.me.uk</organizationUrl>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git@github.com:berndporr/iirj.git</connection>
+    <developerConnection>scm:git:git@github.com:berndporr/iirj.git</developerConnection>
+    <url>https://github.com/berndporr/iirj</url>
+  </scm>
+  
 </project>
