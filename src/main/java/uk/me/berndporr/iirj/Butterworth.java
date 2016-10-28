@@ -49,7 +49,7 @@ public class Butterworth extends Cascade {
 			double n2 = 2 * nPoles;
 			int pairs = nPoles / 2;
 			for (int i = 0; i < pairs; ++i) {
-				Complex c = ComplexUtils.polar2Complex(1F, Math.PI
+				Complex c = ComplexUtils.polar2Complex(1F, Math.PI/2.0
 						+ (2 * i + 1) * Math.PI / n2);
 				addPoleZeroConjugatePairs(c, Complex.INF);
 			}
