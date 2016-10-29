@@ -29,7 +29,7 @@ public class HighPassTransform {
 
 	double f;
 
-	HighPassTransform(double fc, LayoutBase digital, LayoutBase analog) {
+	public HighPassTransform(double fc, LayoutBase digital, LayoutBase analog) {
 		digital.reset();
 
 		// prewarp

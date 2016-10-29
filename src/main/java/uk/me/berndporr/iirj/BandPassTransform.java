@@ -28,13 +28,13 @@ import org.apache.commons.math3.complex.Complex;
  */
 public class BandPassTransform {
 
-	double wc2;
-	double wc;
-	double a, b;
-	double a2, b2;
-	double ab, ab_2;
+	private double wc2;
+	private double wc;
+	private double a, b;
+	private double a2, b2;
+	private double ab, ab_2;
 
-	BandPassTransform(double fc, double fw, LayoutBase digital,
+	public BandPassTransform(double fc, double fw, LayoutBase digital,
 			LayoutBase analog) {
 
 		digital.reset();
@@ -82,7 +82,7 @@ public class BandPassTransform {
 						* Math.tan((wc2 + wn) * 0.5))), analog.getNormalGain());
 	}
 
-	ComplexPair transform(Complex c) {
+	private ComplexPair transform(Complex c) {
 		if (c.isInfinite()) {
 			return new ComplexPair(new Complex(-1), new Complex(1));
 		}

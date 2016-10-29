@@ -36,15 +36,15 @@ public class Butterworth extends Cascade {
 
 	class AnalogLowPass extends LayoutBase {
 
-		int nPoles;
+		private int nPoles;
 
-		AnalogLowPass(int _nPoles) {
+		public AnalogLowPass(int _nPoles) {
 			super(_nPoles);
 			nPoles = _nPoles;
 			setNormal(0, 1);
 		}
 
-		void design() {
+		public void design() {
 			reset();
 			double n2 = 2 * nPoles;
 			int pairs = nPoles / 2;

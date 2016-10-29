@@ -27,15 +27,15 @@ import org.apache.commons.math3.complex.Complex;
 public class BandStopTransform {
 
 
-  double wc;
-  double wc2;
-  double a;
-  double b;
-  double a2;
-  double b2;
+  private double wc;
+  private double wc2;
+  private double a;
+  private double b;
+  private double a2;
+  private double b2;
 
 
-    BandStopTransform(double fc,
+  public BandStopTransform(double fc,
                       double fw,
                       LayoutBase digital,
                       LayoutBase analog) {
@@ -81,7 +81,7 @@ public class BandStopTransform {
             digital.setNormal(0, analog.getNormalGain());
     }
 
-    ComplexPair transform(Complex c) {
+    private ComplexPair transform(Complex c) {
         if (c.isInfinite())
             c = new Complex(-1);
         else

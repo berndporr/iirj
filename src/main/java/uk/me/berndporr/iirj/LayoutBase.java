@@ -35,12 +35,12 @@ public class LayoutBase {
 	private double m_normalW;
 	private double m_normalGain;
 
-	LayoutBase(PoleZeroPair[] pairs) {
+	public LayoutBase(PoleZeroPair[] pairs) {
 		m_numPoles = pairs.length * 2;
 		m_pair = pairs;
 	}
 
-	LayoutBase(int numPoles) {
+	public LayoutBase(int numPoles) {
 		m_numPoles = 0;
 		if ((numPoles % 2) == 1) {
 			m_pair = new PoleZeroPair[numPoles / 2 + 1];
@@ -49,20 +49,20 @@ public class LayoutBase {
 		}
 	}
 
-	void reset() {
+	public void reset() {
 		m_numPoles = 0;
 	}
 
-	int getNumPoles() {
+	public int getNumPoles() {
 		return m_numPoles;
 	}
 
-	void add(Complex pole, Complex zero) {
+	public void add(Complex pole, Complex zero) {
 		m_pair[m_numPoles / 2] = new PoleZeroPair(pole, zero);
 		++m_numPoles;
 	}
 
-	void addPoleZeroConjugatePairs(Complex pole, Complex zero) {
+	public void addPoleZeroConjugatePairs(Complex pole, Complex zero) {
 		if (pole == null) System.out.println("LayoutBase addConj() pole == null");
 		if (zero == null) System.out.println("LayoutBase addConj() zero == null");
 		if (m_pair == null) System.out.println("LayoutBase addConj() m_pair == null");
@@ -71,26 +71,26 @@ public class LayoutBase {
 		m_numPoles += 2;
 	}
 
-	void add(ComplexPair poles, ComplexPair zeros) {
+	public void add(ComplexPair poles, ComplexPair zeros) {
 		System.out.println("LayoutBase add() numPoles="+m_numPoles);
 		m_pair[m_numPoles / 2] = new PoleZeroPair(poles.first, zeros.first,
 				poles.second, zeros.second);
 		m_numPoles += 2;
 	}
 
-	PoleZeroPair getPair(int pairIndex) {
+	public PoleZeroPair getPair(int pairIndex) {
 		return m_pair[pairIndex];
 	}
 
-	double getNormalW() {
+	public double getNormalW() {
 		return m_normalW;
 	}
 
-	double getNormalGain() {
+	public double getNormalGain() {
 		return m_normalGain;
 	}
 
-	void setNormal(double w, double g) {
+	public void setNormal(double w, double g) {
 		m_normalW = w;
 		m_normalGain = g;
 	}

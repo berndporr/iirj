@@ -29,11 +29,11 @@ import org.apache.commons.math3.complex.Complex;
 public class BiquadPoleState extends PoleZeroPair {
 
 
-    BiquadPoleState(Complex p, Complex z) {
+	public BiquadPoleState(Complex p, Complex z) {
         super(p, z);
     }
 
-    BiquadPoleState(Complex p1, Complex z1,
+	public BiquadPoleState(Complex p1, Complex z1,
                     Complex p2, Complex z2) {
         super(p1, z1, p2, z2);
     }

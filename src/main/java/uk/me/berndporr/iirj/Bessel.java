@@ -32,7 +32,7 @@ import org.apache.commons.math3.complex.Complex;
 public class Bessel extends Cascade {
 
 	// returns fact(n) = n!
-	double fact(int n) {
+	private double fact(int n) {
 		if (n == 0)
 			return 1;
 
@@ -52,7 +52,7 @@ public class Bessel extends Cascade {
 
 		// returns the k-th zero based coefficient of the reverse bessel
 		// polynomial of degree n
-		double reversebessel(int k, int n) {
+		private double reversebessel(int k, int n) {
 			double result = fact(2 * n - k)
 					/ ((fact(n - k) * fact(k)) * Math.pow(2., n - k));
 			return result;
@@ -60,7 +60,7 @@ public class Bessel extends Cascade {
 
 		// ------------------------------------------------------------------------------
 
-		AnalogLowPass(int _degree) {
+		public AnalogLowPass(int _degree) {
 			super(_degree);
 			degree = _degree;
 			m_a   = new double[degree + 1]; // input coefficients (degree+1 elements)
@@ -68,7 +68,7 @@ public class Bessel extends Cascade {
 			setNormal(0, 1);			
 		}
 
-		void design() {
+		public void design() {
 			reset();
 
 			for (int i = 0; i < degree + 1; ++i) {

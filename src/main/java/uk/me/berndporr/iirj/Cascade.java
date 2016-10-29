@@ -34,15 +34,15 @@ import org.apache.commons.math3.complex.ComplexUtils;
 public class Cascade {
 
 	// coefficients
-	public Biquad[] m_biquads;
+	private Biquad[] m_biquads;
 
 	// the states of the filters
-	public DirectFormAbstract[] m_states;
+	private DirectFormAbstract[] m_states;
 
 	// number of biquads in the system
-	public int m_numBiquads;
+	private int m_numBiquads;
 
-	public int numPoles;
+	private int numPoles;
 
 	public int getNumBiquads() {
 		return m_numBiquads;
@@ -52,7 +52,7 @@ public class Cascade {
 		return m_biquads[index];
 	}
 
-	Cascade() {
+	public Cascade() {
 		m_numBiquads = 0;
 		m_biquads = null;
 		m_states = null;
@@ -95,7 +95,7 @@ public class Cascade {
 		return ch.divide(cbot);
 	}
 
-	void applyScale(double scale) {
+	public void applyScale(double scale) {
 		// For higher order filters it might be helpful
 		// to spread this factor between all the stages.
 		if (m_biquads.length>0) {
@@ -103,7 +103,7 @@ public class Cascade {
 		}
 	}
 
-	void setLayout(LayoutBase proto, int filterTypes) {
+	public void setLayout(LayoutBase proto, int filterTypes) {
 		numPoles = proto.getNumPoles();
 		m_numBiquads = (numPoles + 1) / 2;
 		m_biquads = new Biquad[m_numBiquads];

@@ -33,18 +33,16 @@ public class ChebyshevI extends Cascade {
 
 	class AnalogLowPass extends LayoutBase {
 
-		int nPoles;
-		double m_rippleDb;
+		private int nPoles;
 
 		// ------------------------------------------------------------------------------
 
-		AnalogLowPass(int _nPoles) {
+		public AnalogLowPass(int _nPoles) {
 			super(_nPoles);
 			nPoles = _nPoles;
 		}
 
-		void design(double rippleDb) {
-			m_rippleDb = rippleDb;
+		public void design(double rippleDb) {
 
 			reset();
 

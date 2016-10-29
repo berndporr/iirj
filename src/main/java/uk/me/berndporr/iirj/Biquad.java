@@ -35,31 +35,31 @@ public class Biquad {
     double m_b2;
     double m_b0;
 
-    double getA0() {
+    public double getA0() {
         return m_a0;
     }
 
-    double getA1() {
+    public double getA1() {
         return m_a1 * m_a0;
     }
 
-    double getA2() {
+    public double getA2() {
         return m_a2 * m_a0;
     }
 
-    double getB0() {
+    public double getB0() {
         return m_b0 * m_a0;
     }
 
-    double getB1() {
+    public double getB1() {
         return m_b1 * m_a0;
     }
 
-    double getB2() {
+    public double getB2() {
         return m_b2 * m_a0;
     }
 
-    Complex response(double normalizedFrequency) {
+    public Complex response(double normalizedFrequency) {
         double a0 = getA0();
         double a1 = getA1();
         double a2 = getA2();
@@ -85,7 +85,7 @@ public class Biquad {
         return ch.divide(cbot);
     }
 
-    void setCoefficients(double a0, double a1, double a2,
+    public void setCoefficients(double a0, double a1, double a2,
                          double b0, double b1, double b2) {
         m_a0 = a0;
         m_a1 = a1 / a0;
@@ -95,7 +95,7 @@ public class Biquad {
         m_b2 = b2 / a0;
     }
 
-    void setOnePole(Complex pole, Complex zero) {
+    public void setOnePole(Complex pole, Complex zero) {
         double a0 = 1;
         double a1 = -pole.getReal();
         double a2 = 0;
@@ -105,7 +105,7 @@ public class Biquad {
         setCoefficients(a0, a1, a2, b0, b1, b2);
     }
 
-    void setTwoPole(Complex pole1, Complex zero1,
+    public void setTwoPole(Complex pole1, Complex zero1,
                     Complex pole2, Complex zero2) {
         double a0 = 1;
         double a1;
@@ -138,23 +138,23 @@ public class Biquad {
         setCoefficients(a0, a1, a2, b0, b1, b2);
     }
 
-    void setPoleZeroForm(BiquadPoleState bps) {
+    public void setPoleZeroForm(BiquadPoleState bps) {
         setPoleZeroPair(bps);
         applyScale(bps.gain);
     }
 
-    void setIdentity() {
+    public void setIdentity() {
         setCoefficients(1, 0, 0, 1, 0, 0);
     }
 
-    void applyScale(double scale) {
+    public void applyScale(double scale) {
         m_b0 *= scale;
         m_b1 *= scale;
         m_b2 *= scale;
     }
 
 
-    void setPoleZeroPair(PoleZeroPair pair) {
+    public void setPoleZeroPair(PoleZeroPair pair) {
         if (pair.isSinglePole()) {
             setOnePole(pair.poles.first, pair.zeros.first);
         } else {

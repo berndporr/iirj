@@ -32,47 +32,16 @@ public class ChebyshevII extends Cascade {
 
 	class AnalogLowPass extends LayoutBase {
 
-		int nPoles;
+		private int nPoles;
 
 		// ------------------------------------------------------------------------------
 
-		AnalogLowPass(int _nPoles) {
+		public AnalogLowPass(int _nPoles) {
 			super(_nPoles);
 			nPoles = _nPoles;
 		}
 		
-		
-		void designxxx(double rippleDb) {
-			reset();
-
-			double eps = Math.sqrt(1. / Math.exp(-rippleDb * 0.1
-					* MathSupplement.doubleLn10) - 1);
-			double v0 = MathSupplement.asinh(1 / eps) / nPoles;
-			double sinh_v0 = -Math.sinh(v0);
-			double cosh_v0 = Math.cosh(v0);
-
-			double n2 = 2 * nPoles;
-			int pairs = nPoles / 2;
-			for (int i = 0; i < pairs; ++i) {
-				int k = 2 * i + 1 - nPoles;
-				double a = sinh_v0 * Math.cos(k * Math.PI / n2);
-				double b = cosh_v0 * Math.sin(k * Math.PI / n2);
-
-				addPoleZeroConjugatePairs(new Complex(a, b), new Complex(
-						Double.POSITIVE_INFINITY));
-			}
-
-			if ((nPoles & 1) == 1) {
-				add(new Complex(sinh_v0, 0), new Complex(
-						Double.POSITIVE_INFINITY));
-				setNormal(0, 1);
-			} else {
-				setNormal(0, Math.pow(10, -rippleDb / 20.));
-			}
-		}
-
-		
-		void design(double stopBandDb) {
+		public void design(double stopBandDb) {
 			reset();
 
 			double eps = Math.sqrt(1. / (Math.exp(stopBandDb * 0.1 * MathSupplement.doubleLn10) - 1));

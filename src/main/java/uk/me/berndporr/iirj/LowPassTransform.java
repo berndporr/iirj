@@ -28,7 +28,7 @@ import org.apache.commons.math3.complex.Complex;
  */
 public class LowPassTransform {
 
-	double f;
+	private double f;
 
 	private Complex transform(Complex c) {
 		if (c.isInfinite())
