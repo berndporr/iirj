@@ -58,7 +58,7 @@ Just run: "mvn install" to add it to your local maven respository.
 Android Studio
 --------------
 dependencies {
-    compile group: 'uk.me.berndporr', name:'iirj', version: '1.0.0'
+    compile group: 'uk.me.berndporr', name:'iirj', version: '1.0'
     compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 }
 
