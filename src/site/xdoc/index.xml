@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+  
+  <!--
+      Licensed to the Apache Software Foundation (ASF) under one or more
+      contributor license agreements.  See the NOTICE file distributed with
+      this work for additional information regarding copyright ownership.
+      The ASF licenses this file to You under the Apache License, Version 2.0
+      (the "License"); you may not use this file except in compliance with
+      the License.  You may obtain a copy of the License at
+      
+      http://www.apache.org/licenses/LICENSE-2.0
+      
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+  -->
+  
+  <properties>
+    <title>IIRJ -- IIR Filters</title>
+  </properties>
+  <body>
+    <section name="Introduction">
+      <p>
+        This is package provides a selection of standard IIR filters such as Bessel, Butterworth and Chebyshev.
+	The filters are designed on the basis of analogue lowpass filters and transformed with the z-transform
+	to the digital space into a chain of 2nd order biquads.
+      </p>
+    </section>
+    <section name="Usage">
+      <subsection name="Setup">In general one needs two commands to set up the filter:
+	<ol>
+	  <li>Constructor call which defines the type of the filter, for example:
+	  <source>Butterworth butterworth = new Butterworth();</source>
+	  </li>
+	  <li>Call of the method which creates the desired filter response, for example:
+	  <source>butterworth.bandPass(order, Samplingfreq, Center freq, Width in frequ);</source>
+	  The filter order represents the number of poles, the 2nd argument is always the
+	  sampling frequency and the remaining parameters define the cutoff, center, width
+	  and other factors requied for the specific filter.
+	  </li>
+	</ol>
+      </subsection>
+      <subsection name="Filtering">
+	Filtering of the signal with, for example <source>outsample = butterworth.filter(insample)</source>
+      </subsection>
+    </section>
+    <section name="Butterworth">
+      <p>This is the standard Butterworth filter available as low-, high-, bandpass and stopband filter.</p>
+      <h4>Setup</h4>
+      <source>Butterworth butterworth = new Butterworth()</source>
+      <h4>Lowpass</h4>
+      <source>butterworth.lowPass(filter order, Sampling frequency,Cutoff frequency);</source>
+      <h4>Highpass</h4>
+      <source>butterworth.highPass(filter order, Sampling frequency,Cutoff frequency);</source>
+      <h4>Bandpass</h4>
+      <source>butterworth.bandPass(filter order, Sampling frequency,Center frequency, Width);</source>
+      <h4>Bandstop</h4>
+      <source>butterworth.bandStop(filter order, Sampling frequency,Center frequency, Width);</source>
+    </section>
+    <section name="Bessel">
+      <p>This is the standard Bessel filter available as low-, high-, bandpass and stopband filter.</p>
+      <h4>Setup</h4>
+      <source>Bessel bessel = new Bessel()</source>
+      <h4>Lowpass</h4>
+      <source>bessel.lowPass(filter order, Sampling frequency,Cutoff frequency);</source>
+      <h4>Highpass</h4>
+      <source>bessel.highPass(filter order, Sampling frequency,Cutoff frequency);</source>
+      <h4>Bandpass</h4>
+      <source>bessel.bandPass(filter order, Sampling frequency,Center frequency, Width);</source>
+      <h4>Bandstop</h4>
+      <source>bessel.bandStop(filter order, Sampling frequency,Center frequency, Width);</source>
+    </section>
+    <section name="ChebyshevI">
+      <p>This is the Chebyshev type I filter available as low-, high-, bandpass and stopband filter. In addition
+      to the standard parameters one needs to specify the allowed ripple in the passband in debcibel.</p>
+      <h4>Setup</h4>
+      <source>ChebyshevI chebyshevI = new ChebyshevI()</source>
+      <h4>Lowpass</h4>
+      <source>chebyshevI.lowPass(filter order, Sampling frequency,Cutoff frequency, ripple in DB);</source>
+      <h4>Highpass</h4>
+      <source>chebyshevI.highPass(filter order, Sampling frequency,Cutoff frequency, ripple in DB);</source>
+      <h4>Bandpass</h4>
+      <source>chebyshevI.bandPass(filter order, Sampling frequency,Center frequency, Width, ripple in DB);</source>
+      <h4>Bandstop</h4>
+      <source>chebyshevI.bandStop(filter order, Sampling frequency,Center frequency, Width, ripple in DB);</source>
+    </section>
+    <section name="ChebyshevII">
+      <h4>Setup</h4>
+      <source>ChebyshevII chebyshevII = new ChebyshevII()</source>
+      <p>This is the Chebyshev type II filter available as low-, high-, bandpass and stopband filter. In addition
+      to the standard parameters one needs to specify the allowed ripple in the stopband in debcibel.</p>
+      <h4>Lowpass</h4>
+      <source>chebyshevII.lowPass(filter order, Sampling frequency,Cutoff frequency, ripple in DB);</source>
+      <h4>Highpass</h4>
+      <source>chebyshevII.highPass(filter order, Sampling frequency,Cutoff frequency, ripple in DB);</source>
+      <h4>Bandpass</h4>
+      <source>chebyshevII.bandPass(filter order, Sampling frequency,Center frequency, Width, ripple in DB);</source>
+      <h4>Bandstop</h4>
+      <source>chebyshevII.bandStop(filter order, Sampling frequency,Center frequency, Width, ripple in DB);</source>
+    </section>
+  </body>
+</document>
