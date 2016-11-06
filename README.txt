@@ -65,6 +65,7 @@ dependencies {
 Documentation
 -------------
 Run: "mvn javadoc:javadoc" to generate the JavaDoc
+Run: "mvn site" to generate the web pages containing the documentation.
 
 Testing
 -------
