@@ -64,6 +64,7 @@ public class DetectorTest {
 		int notDet = 0;
 		double time = 0;
 		int ignore = 100;
+		int sampleno = 0;
 
 		// let's do an impulse response
 		while(is.hasNextLine()) {
@@ -87,14 +88,15 @@ public class DetectorTest {
 				if (v > 0.5*max) {
 					t1 = time;
 					notDet = 50;
-					long r = Math.round((t1-t2)*60);
+					int r = (int)Math.round((t1-t2)*60);
 					if (r>30) {
-						hr.println(""+r);
-						Assert.assertTrue((r>59)&&(r<81));
+						hr.println(String.format("%d %d",sampleno,r));
+						Assert.assertTrue((r>60)&&(r<160));
 					}
 					t2 = t1;
 				}
 			}
+			sampleno++;
 		}
 
 		os.close();
