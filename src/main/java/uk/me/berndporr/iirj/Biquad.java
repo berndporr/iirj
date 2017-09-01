@@ -59,6 +59,28 @@ public class Biquad {
         return m_b2 * m_a0;
     }
 
+    public Biquad() {
+        m_a0 = 1.0;
+        m_a1 = 0.0;
+        m_a2 = 0.0;
+        m_b1 = 0.0;
+        m_b2 = 0.0;
+        m_b0 = 0.0;
+    }
+
+    public Biquad(Biquad bq) {
+        this.m_a0 = bq.m_a0;
+        this.m_a1 = bq.m_a1;
+        this.m_a2 = bq.m_a2;
+        this.m_b1 = bq.m_b1;
+        this.m_b2 = bq.m_b2;
+        this.m_b0 = bq.m_b0;
+    }
+
+    public Biquad copy() {
+            return new Biquad(this);
+    }
+
     public Complex response(double normalizedFrequency) {
         double a0 = getA0();
         double a1 = getA1();

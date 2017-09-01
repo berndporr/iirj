@@ -31,6 +31,8 @@ public abstract class DirectFormAbstract {
         reset();
     }
 
+    public abstract DirectFormAbstract copy();
+
     public abstract void reset();
 
     public abstract double process1 (double in, Biquad s);
