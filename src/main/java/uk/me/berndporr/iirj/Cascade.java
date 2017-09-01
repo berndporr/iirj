@@ -58,6 +58,27 @@ public class Cascade {
 		m_states = null;
 	}
 
+	public Cascade(Cascade cascade) {
+
+		this.m_biquads = new Biquad[ cascade.m_biquads.length ];
+		for (int i=0; i<cascade.m_biquads.length; i++) {
+			this.m_biquads[i] = cascade.m_biquads[i].copy();
+		}
+
+		this.m_states = new DirectFormAbstract[cascade.m_states.length];
+
+		for (int i=0; i<cascade.m_states.length; i++) {
+			this.m_states[i] = cascade.m_states[i].copy();
+		}
+
+		this.m_numBiquads =  cascade.m_numBiquads;
+		this.numPoles = cascade.numPoles;
+	}
+
+	public Cascade copy() {
+		return new Cascade(this);
+	}
+
 	public void reset() {
 		for (int i = 0; i < m_numBiquads; i++)
 			m_states[i].reset();

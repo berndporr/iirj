@@ -29,9 +29,22 @@ package uk.me.berndporr.iirj;
 
 public class DirectFormII extends DirectFormAbstract {
 
+    double m_v1; // v[-1]
+    double m_v2; // v[-2]
+
     public DirectFormII() {
         reset();
     }
+
+    public DirectFormAbstract copy() {
+        return new DirectFormII(this);
+    }
+
+    public DirectFormII(DirectFormII di) {
+        m_v1 = di.m_v1;
+        m_v2 = di.m_v2;
+    }
+
 
     public void reset() {
         m_v1 = 0;
@@ -53,6 +66,4 @@ public class DirectFormII extends DirectFormAbstract {
     	}
     }
 
-    double m_v1; // v[-1]
-    double m_v2; // v[-2]
 }
