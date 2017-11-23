@@ -13,7 +13,7 @@ by Vinnie Falco.
 
 ## Usage
 
-import uk.me.berndporr.iirj.*;
+`import uk.me.berndporr.iirj.*;`
 
 For example the Butterworth filter:
 
@@ -65,8 +65,8 @@ dependencies {
 ```
 
 ## Documentation
-* Run: "mvn javadoc:javadoc" to generate the JavaDoc
-* Run: "mvn site" to generate the web pages containing the documentation.
+* Run: `mvn javadoc:javadoc` to generate the JavaDoc
+* Run: `mvn site` to generate the web pages containing the documentation.
 
 ## Testing
 Run: `mvn test` which will create impulse responses in subdirectories
