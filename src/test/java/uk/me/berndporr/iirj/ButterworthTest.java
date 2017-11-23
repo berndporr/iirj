@@ -110,6 +110,29 @@ public class ButterworthTest {
 	}
 
 	@Test
+	public void bandStopDCTest() throws Exception {
+		Butterworth butterworth = new Butterworth();
+		butterworth.bandStop(2, 250, 50, 5);
+
+		createDir();
+		FileOutputStream os = new FileOutputStream(prefix+"bsdc.txt");
+		PrintStream bp = new PrintStream(os);
+
+		// let's do an impulse response
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i>10) v = 1;
+			v = butterworth.filter(v);
+			bp.println("" + v);
+		}
+		Assert.assertTrue(Math.abs(butterworth.filter(1))>0.99999999);
+		Assert.assertTrue(Math.abs(butterworth.filter(1))<1.00000001);
+		Assert.assertTrue(Math.abs(butterworth.filter(1))!=Double.NaN);
+
+		os.close();
+	}
+
+	@Test
 	public void highPassTest() throws Exception {
 		Butterworth butterworth = new Butterworth();
 		butterworth.highPass(4, 250, 50);
