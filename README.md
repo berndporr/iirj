@@ -44,11 +44,10 @@ Sample by sample for realtime processing:
 v = butterworth.filter(v)
 ```
 
-## Coding examples See the *Test.java files for complete examples. Run
+## Coding examples
+See the *Test.java files for complete examples. Run
 them with `mvn test`. These test programs write the different impulse
-responses of the filters to text files which you can then plot with the
-octave script `filtertest.m` Also very useful to tweak the filter
-parameters and see the effects.
+responses of the filters to text files.
 
 ## Installation
 Just run: `mvn install` to add it to your local maven respository or
@@ -65,17 +64,18 @@ dependencies {
 ```
 
 ## Documentation
-* Run: `mvn javadoc:javadoc` to generate the JavaDoc
-* Run: `mvn site` to generate the web pages containing the documentation.
+* `mvn javadoc:javadoc` generates the JavaDocs
+* `mvn site` generates the web pages containing the documentation
+under `target/site`.
 
 ## Testing
-Run: `mvn test` which will create impulse responses in subdirectories
-for the filters implemented in: `target/surefire-reports`.
+`mvn test` creates impulse responses in the subdirectories
+for the different filters: `target/surefire-reports`.
 
 To see the frequency responses install octave, copy the script
 'src/test/resources/filtertest.m'
 in these subdirectories and run it from there. You should see the
-different frequency reponses of these filters. You can try
+different frequency reponses for high/low/stop/bandpass. You can try
 out different filter parameters by modifiing the test
 scripts and re-run 'mvn test'.
 
