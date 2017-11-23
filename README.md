@@ -45,7 +45,7 @@ v = butterworth.filter(v)
 ```
 
 ## Coding examples
-See the *Test.java files for complete examples. Run
+See the `*Test.java` files for complete examples. Run
 them with `mvn test`. These test programs write the different impulse
 responses of the filters to text files.
 
