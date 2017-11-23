@@ -28,6 +28,8 @@ fx = linspace(0,250,length(lp));
 subplot(2,2,1);
 plot(fx,fy);
 axis([ 0 125 0 1]);
+title("Lowpass");
+xlabel("f/Hz");
 #
 load "hp.txt"
 fy = abs(fft(hp));
@@ -35,6 +37,8 @@ fx = linspace(0,250,length(lp));
 subplot(2,2,2);
 plot(fx,fy);
 axis([ 0 125 0 1]);
+title("Highpass");
+xlabel("f/Hz");
 #
 load "bp.txt"
 fy = abs(fft(bp));
@@ -42,6 +46,8 @@ fx = linspace(0,250,length(lp));
 subplot(2,2,3);
 plot(fx,fy);
 axis([ 0 125 0 1]);
+title("Bandpass");
+xlabel("f/Hz");
 #
 load "bs.txt"
 fy = abs(fft(bs));
@@ -49,5 +55,6 @@ fx = linspace(0,250,length(lp));
 subplot(2,2,4);
 plot(fx,fy);
 axis([ 0 125 0 1]);
-
+xlabel("f/Hz");
+title("Bandstop");
 print 'filtertest.png'

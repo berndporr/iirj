@@ -18,45 +18,51 @@ import uk.me.berndporr.iirj.*;
 For example the Butterworth filter:
 
 ### Constructor
-  Butterworth butterworth = new Butterworth();
+  `Butterworth butterworth = new Butterworth();`
 
 ### Initialisation
-1. Butterworth
+1. Bandstop
+
    `butterworth.bandStop(order,Samplingfreq,Center freq,Width in frequ);`
 
 2. Bandpass
+
    `butterworth.bandPass(order,Samplingfreq,Center freq,Width in frequ);`
 
 3. Lowpass
+
    `butterworth.lowPass(order,Samplingfreq,Cutoff frequ);`
 
 4. Highpass
+
    `butterworth.highPass(order,Samplingfreq,Cutoff frequ);`
 
 ### Filtering
 Sample by sample for realtime processing:
 
-`v = butterworth.filter(v)`
+```
+v = butterworth.filter(v)
+```
 
-## Coding examples
-See the *Test.java files for complete examples. Run them with
-"mvn test"
-These test programs write different impulse responses of
-filters to text files which you can then plot with
-the octave script filtertest.m Also very useful to tweak the
-filter parameters and see the effects.
+## Coding examples See the *Test.java files for complete examples. Run
+them with `mvn test`. These test programs write the different impulse
+responses of the filters to text files which you can then plot with the
+octave script `filtertest.m` Also very useful to tweak the filter
+parameters and see the effects.
 
 ## Installation
-Just run: "mvn install" to add it to your local maven respository or
+Just run: `mvn install` to add it to your local maven respository or
 just point your project to Maven Central:
 
 ## Maven central
 [http://search.maven.org/#artifactdetails%7Cuk.me.berndporr%7Ciirj%7C1.0%7Cjar]
 
 ## Android Studio
+```
 dependencies {
     compile group: 'uk.me.berndporr', name:'iirj', version: '1.0'
 }
+```
 
 ## Documentation
 * Run: "mvn javadoc:javadoc" to generate the JavaDoc
@@ -83,4 +89,4 @@ stored in hr.txt.
 Have fun
 
 /Bernd Porr
-[www.berndporr.me.uk]
+[http://www.berndporr.me.uk]
