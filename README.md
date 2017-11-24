@@ -2,12 +2,11 @@
 
 An IIR filter library written in JAVA.
 
-Filters: Highpass, lowpass, bandpass and bandstop as
-Butterworth, Bessel and Chebyshev Type I/II
+Highpass, lowpass, bandpass and bandstop as
+Butterworth, Bessel and Chebyshev Type I/II.
 
-It's based on the IIR1 library: [https://github.com/berndporr/iir1]
-which in turn is based on [https://github.com/vinniefalco/DSPFilters]
-by Vinnie Falco.
+It's based on the IIR1 library [https://github.com/berndporr/iir1]
+which in turn is based on Vinnie Falco's DSPFilters [https://github.com/vinniefalco/DSPFilters].
 
 ![alt tag](filtertest.png)
 
@@ -15,9 +14,8 @@ by Vinnie Falco.
 
 `import uk.me.berndporr.iirj.*;`
 
-For example the Butterworth filter:
-
 ### Constructor
+
   `Butterworth butterworth = new Butterworth();`
 
 ### Initialisation
@@ -44,10 +42,9 @@ Sample by sample for realtime processing:
 v = butterworth.filter(v)
 ```
 
-## Coding examples
-See the `*Test.java` files for complete examples. Run
-them with `mvn test`. These test programs write the different impulse
-responses of the filters to text files.
+## Coding examples See the `*Test.java` files for complete examples
+for all filter types. Run them with `mvn test`. These test programs
+write the different impulse responses of the filters to text files.
 
 ## Installation
 Just run: `mvn install` to add it to your local maven respository or
@@ -66,7 +63,7 @@ dependencies {
 ## Documentation
 * `mvn javadoc:javadoc` generates the JavaDocs
 * `mvn site` generates the web pages containing the documentation
-under `target/site`.
+under `target/site` describing all commands in detail.
 
 ## Testing
 `mvn test` creates impulse responses in the subdirectories
