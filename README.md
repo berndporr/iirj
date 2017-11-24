@@ -42,7 +42,8 @@ Sample by sample for realtime processing:
 v = butterworth.filter(v)
 ```
 
-## Coding examples See the `*Test.java` files for complete examples
+## Coding examples
+See the `*Test.java` files for complete examples
 for all filter types. Run them with `mvn test`. These test programs
 write the different impulse responses of the filters to text files.
 
