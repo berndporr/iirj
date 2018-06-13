@@ -54,6 +54,10 @@ just point your project to Maven Central:
 ## Maven central
 [http://search.maven.org/#artifactdetails%7Cuk.me.berndporr%7Ciirj%7C1.0%7Cjar]
 
+Note that maven has just version.subversion. This is intenrional so that
+smaller cosmetic changes on github (such as the README) won't trigger
+a new release on maven.
+
 ## Android Studio
 ```
 dependencies {
