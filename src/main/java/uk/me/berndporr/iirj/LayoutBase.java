@@ -72,7 +72,6 @@ public class LayoutBase {
 	}
 
 	public void add(ComplexPair poles, ComplexPair zeros) {
-		System.out.println("LayoutBase add() numPoles="+m_numPoles);
 		m_pair[m_numPoles / 2] = new PoleZeroPair(poles.first, zeros.first,
 				poles.second, zeros.second);
 		m_numPoles += 2;
