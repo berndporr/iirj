@@ -88,3 +88,5 @@ Have fun
 
 /Bernd Porr
 [http://www.berndporr.me.uk]
+
+[![Maven Central](https://img.shields.io/maven-central/v/uk.me.berndporr/iirj.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22uk.me.berndporr%22%20AND%20a:%22iirj%22)
