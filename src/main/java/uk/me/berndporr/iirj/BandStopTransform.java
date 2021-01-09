@@ -36,11 +36,15 @@ public class BandStopTransform {
 
 
   public BandStopTransform(double fc,
-                      double fw,
-                      LayoutBase digital,
-                      LayoutBase analog) {
+			   double fw,
+			   LayoutBase digital,
+			   LayoutBase analog) {
         digital.reset();
 
+	if (!(fc < 0.5)) {
+		throw new ArithmeticException("Normalised cutoff frequency must be less than 0.5.");
+	}
+	
         double ww = 2 * Math.PI * fw;
 
         wc2 = 2 * Math.PI * fc - (ww / 2);

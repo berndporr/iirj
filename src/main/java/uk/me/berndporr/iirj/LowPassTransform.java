@@ -46,6 +46,10 @@ public class LowPassTransform {
 	public LowPassTransform(double fc, LayoutBase digital, LayoutBase analog) {
 		digital.reset();
 
+		if (!(fc < 0.5)) {
+			throw new ArithmeticException("Normalised cutoff frequency must be less than 0.5.");
+		}
+
 		// prewarp
 		f = Math.tan(Math.PI * fc);
 

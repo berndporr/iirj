@@ -32,6 +32,10 @@ public class HighPassTransform {
 	public HighPassTransform(double fc, LayoutBase digital, LayoutBase analog) {
 		digital.reset();
 
+		if (!(fc < 0.5)) {
+			throw new ArithmeticException("Normalised cutoff frequency must be less than 0.5.");
+		}
+
 		// prewarp
 		f = 1. / Math.tan(Math.PI * fc);
 

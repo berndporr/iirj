@@ -39,6 +39,10 @@ public class BandPassTransform {
 
 		digital.reset();
 
+		if (!(fc < 0.5)) {
+			throw new ArithmeticException("Normalised cutoff frequency must be less than 0.5.");
+		}
+
 		double ww = 2 * Math.PI * fw;
 
 		// pre-calcs
