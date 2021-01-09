@@ -39,8 +39,12 @@ public class BandPassTransform {
 
 		digital.reset();
 
+		if (fc < 0) {
+			throw new ArithmeticException("Cutoff frequency cannot be negative.");
+		}
+		
 		if (!(fc < 0.5)) {
-			throw new ArithmeticException("Normalised cutoff frequency must be less than 0.5.");
+			throw new ArithmeticException("Cutoff frequency must be less than the Nyquist frequency.");
 		}
 
 		double ww = 2 * Math.PI * fw;
