@@ -31,6 +31,11 @@ public class ButterworthTest {
 
 	static String prefix="target/surefire-reports/butterworth/";
 
+	static double fs = 250;
+	static double fc = 10;
+	static int order = 6;
+	static int nSteps = 10000;
+
 	void createDir() throws Exception {
 		File dir = new File(prefix);
 		dir.mkdirs();
@@ -40,23 +45,25 @@ public class ButterworthTest {
 	public void lowPassTest() throws Exception {
 
 		Butterworth butterworth = new Butterworth();
-		butterworth.lowPass(4, 250, 50);
+		butterworth.lowPass(order, fs, fc);
 
 		createDir();
 		FileOutputStream os = new FileOutputStream(prefix+"lp.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for (int i = 0; i < 500; i++) {
-			double v = 0;
+		double v = 0;
+		for (int i = 0; i < nSteps; i++) {
+			v = 0;
 			if (i == 10)
 				v = 1;
 			v = butterworth.filter(v);
 			bp.println("" + v);
 		}
-		Assert.assertTrue(Math.abs(butterworth.filter(0))<1E-80);
-		Assert.assertTrue(Math.abs(butterworth.filter(0))!=0.0);
-		Assert.assertTrue(Math.abs(butterworth.filter(0))!=Double.NaN);
+		System.out.println("Lowpass filter output = "+v);
+		Assert.assertTrue(v < 1E-80);
+		Assert.assertTrue(v != 0.0);
+		Assert.assertTrue(v != Double.NaN);
 
 		os.close();
 	}
@@ -64,23 +71,25 @@ public class ButterworthTest {
 	@Test
 	public void bandPassTest() throws Exception {
 		Butterworth butterworth = new Butterworth();
-		butterworth.bandPass(2, 250, 50, 5);
+		butterworth.bandPass(order, fs, fc, fc/4);
 
 		createDir();
 		FileOutputStream os = new FileOutputStream(prefix+"bp.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for (int i = 0; i < 500; i++) {
-			double v = 0;
+		double v = 0;
+		for (int i = 0; i < nSteps; i++) {
+			v = 0;
 			if (i == 10)
 				v = 1;
 			v = butterworth.filter(v);
 			bp.println("" + v);
 		}
-		Assert.assertTrue(Math.abs(butterworth.filter(0))<1E-10);
-		Assert.assertTrue(Math.abs(butterworth.filter(0))!=0.0);
-		Assert.assertTrue(Math.abs(butterworth.filter(0))!=Double.NaN);
+		System.out.println("Bandpass filter output = "+v);
+		Assert.assertTrue(v < 1E-10);
+		Assert.assertTrue(v != 0.0);
+		Assert.assertTrue(v != Double.NaN);
 
 		os.close();
 	}
@@ -88,46 +97,25 @@ public class ButterworthTest {
 	@Test
 	public void bandStopTest() throws Exception {
 		Butterworth butterworth = new Butterworth();
-		butterworth.bandStop(2, 250, 50, 5);
+		butterworth.bandStop(order, fs, fc, fc/4);
 
 		createDir();
 		FileOutputStream os = new FileOutputStream(prefix+"bs.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for (int i = 0; i < 500; i++) {
-			double v = 0;
+		double v = 0;
+		for (int i = 0; i < nSteps; i++) {
+			v = 0;
 			if (i == 10)
 				v = 1;
 			v = butterworth.filter(v);
 			bp.println("" + v);
 		}
-		Assert.assertTrue(Math.abs(butterworth.filter(0))<1E-10);
-		Assert.assertTrue(Math.abs(butterworth.filter(0))!=0.0);
-		Assert.assertTrue(Math.abs(butterworth.filter(0))!=Double.NaN);
-
-		os.close();
-	}
-
-	@Test
-	public void bandStopDCTest() throws Exception {
-		Butterworth butterworth = new Butterworth();
-		butterworth.bandStop(2, 250, 50, 5);
-
-		createDir();
-		FileOutputStream os = new FileOutputStream(prefix+"bsdc.txt");
-		PrintStream bp = new PrintStream(os);
-
-		// let's do an impulse response
-		for (int i = 0; i < 500; i++) {
-			double v = 0;
-			if (i>10) v = 1;
-			v = butterworth.filter(v);
-			bp.println("" + v);
-		}
-		Assert.assertTrue(Math.abs(butterworth.filter(1))>0.99999999);
-		Assert.assertTrue(Math.abs(butterworth.filter(1))<1.00000001);
-		Assert.assertTrue(Math.abs(butterworth.filter(1))!=Double.NaN);
+		System.out.println("Bandstop filter output = "+v);
+		Assert.assertTrue(v < 1E-10);
+		Assert.assertTrue(v != 0.0);
+		Assert.assertTrue(v != Double.NaN);
 
 		os.close();
 	}
@@ -135,34 +123,37 @@ public class ButterworthTest {
 	@Test
 	public void highPassTest() throws Exception {
 		Butterworth butterworth = new Butterworth();
-		butterworth.highPass(4, 250, 50);
+		butterworth.highPass(order, fs, fc);
 
 		createDir();
 		FileOutputStream os = new FileOutputStream(prefix+"hp.txt");
 		PrintStream bp = new PrintStream(os);
 
 		// let's do an impulse response
-		for (int i = 0; i < 500; i++) {
-			double v = 0;
+		double v = 0;
+		for (int i = 0; i < nSteps; i++) {
+			v = 0;
 			if (i == 10)
 				v = 1;
 			v = butterworth.filter(v);
 			bp.println("" + v);
 		}
-		Assert.assertTrue(Math.abs(butterworth.filter(0))<1E-80);
-		Assert.assertTrue(Math.abs(butterworth.filter(0))!=0.0);
-		Assert.assertTrue(Math.abs(butterworth.filter(0))!=Double.NaN);
+		System.out.println("Highpass filter output = "+v);
+		Assert.assertTrue(v < 1E-80);
+		Assert.assertTrue(v != 0.0);
+		Assert.assertTrue(v != Double.NaN);
 
 		os.close();
 	}
 
 	public void main(String args[]) {
 		try {
-		lowPassTest();
-		highPassTest();
-		bandPassTest();
-		bandStopTest();
+			lowPassTest();
+			highPassTest();
+			bandPassTest();
+			bandStopTest();
 		} catch (Exception e) {
+			Assert.fail("Exception while executing the filtering op:"+e.getMessage());
 		}
 	}
 }

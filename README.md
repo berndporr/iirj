@@ -70,12 +70,11 @@ under `target/site` describing all commands in detail.
 `mvn test` creates impulse responses in the subdirectories
 for the different filters: `target/surefire-reports`.
 
-To see the frequency responses install octave, copy the script
-'src/test/resources/filtertest.m'
-in these subdirectories and run it from there. You should see the
-different frequency reponses for high/low/stop/bandpass. You can try
-out different filter parameters by modifiing the test
-scripts and re-run 'mvn test'.
+To see the impulse and frequency responses run:
+```
+python3 ./plot_impulse_fresponse.py <filter>
+```
+where is <filter> is bessel, butterworth, chebyshevI or chebyshevII.
 
 The script DetectorTest uses a bandpass filter to detect the
 heartbeats of an ECG recording faking a matched filter which could
