@@ -52,7 +52,10 @@ Just run: `mvn install` to add it to your local maven respository or
 just point your project to Maven Central:
 
 ## Maven central
-[https://search.maven.org/artifact/uk.me.berndporr/iirj/1.3/jar]
+
+Click on the badge to get the latest version:
+[![Maven Central](https://img.shields.io/maven-central/v/uk.me.berndporr/iirj.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22uk.me.berndporr%22%20AND%20a:%22iirj%22)
+
 
 ## Android Studio
 ```
@@ -88,4 +91,3 @@ Have fun
 /Bernd Porr
 [http://www.berndporr.me.uk]
 
-[![Maven Central](https://img.shields.io/maven-central/v/uk.me.berndporr/iirj.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22uk.me.berndporr%22%20AND%20a:%22iirj%22)
