@@ -53,9 +53,9 @@ just point your project to Maven Central:
 
 ## Maven central
 
-Click on the badge to get the latest version:
+Click on 
 [![Maven Central](https://img.shields.io/maven-central/v/uk.me.berndporr/iirj.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22uk.me.berndporr%22%20AND%20a:%22iirj%22)
-
+to get the latest version.
 
 ## Android Studio
 ```
