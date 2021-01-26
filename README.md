@@ -52,12 +52,12 @@ Just run: `mvn install` to add it to your local maven respository or
 just point your project to Maven Central:
 
 ## Maven central
-[http://search.maven.org/#artifactdetails%7Cuk.me.berndporr%7Ciirj%7C1.1%7Cjar]
+[https://search.maven.org/artifact/uk.me.berndporr/iirj/1.3/jar]
 
 ## Android Studio
 ```
 dependencies {
-    compile group: 'uk.me.berndporr', name:'iirj', version: '1.1'
+    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.3'
 }
 ```
 
