@@ -103,10 +103,7 @@ public class Cascade {
 		}
 	}
 
-	public void setLayout(LayoutBase proto, int filterTypes) {
-		numPoles = proto.getNumPoles();
-		m_numBiquads = (numPoles + 1) / 2;
-		m_biquads = new Biquad[m_numBiquads];
+	private void createStates(int filterTypes) {
 		switch (filterTypes) {
 		case DirectFormAbstract.DIRECT_FORM_I:
 			m_states = new DirectFormI[m_numBiquads];
@@ -122,6 +119,13 @@ public class Cascade {
 			}
 			break;
 		}
+	}
+
+	public void setLayout(LayoutBase proto, int filterTypes) {
+		numPoles = proto.getNumPoles();
+		m_numBiquads = (numPoles + 1) / 2;
+		m_biquads = new Biquad[m_numBiquads];
+		createStates(filterTypes);
 		for (int i = 0; i < m_numBiquads; ++i) {
 			PoleZeroPair p = proto.getPair(i);
 			m_biquads[i] = new Biquad();
@@ -130,5 +134,26 @@ public class Cascade {
 		applyScale(proto.getNormalGain()
 				/ ((response(proto.getNormalW() / (2 * Math.PI)))).abs());
 	}
+
+	public void setSOScoeff(int order,
+				double[][] sosCoefficients,
+				int stateTypes) {
+		m_numBiquads = sosCoefficients.length;
+		m_biquads = new Biquad[m_numBiquads];
+		createStates(stateTypes);
+		for (int i = 0; i < m_numBiquads; ++i) {
+			m_biquads[i] = new Biquad();
+			m_biquads[i].setCoefficients(
+                                sosCoefficients[i][3],
+                                sosCoefficients[i][4],
+                                sosCoefficients[i][5],
+                                sosCoefficients[i][0],
+                                sosCoefficients[i][1],
+                                sosCoefficients[i][2]
+						    );
+		}
+		applyScale(1);
+	}
+
 
 };
