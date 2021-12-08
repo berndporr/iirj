@@ -60,7 +60,7 @@ to get the latest version.
 ## Android Studio
 ```
 dependencies {
-    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.3'
+    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.4'
 }
 ```
 

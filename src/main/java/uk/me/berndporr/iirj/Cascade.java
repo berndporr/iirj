@@ -135,9 +135,8 @@ public class Cascade {
 				/ ((response(proto.getNormalW() / (2 * Math.PI)))).abs());
 	}
 
-	public void setSOScoeff(int order,
-				double[][] sosCoefficients,
-				int stateTypes) {
+	public void setSOScoeff(final double[][] sosCoefficients,
+				final int stateTypes) {
 		m_numBiquads = sosCoefficients.length;
 		m_biquads = new Biquad[m_numBiquads];
 		createStates(stateTypes);

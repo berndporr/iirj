@@ -86,7 +86,7 @@ public class Biquad {
     }
 
     public void setCoefficients(double a0, double a1, double a2,
-                         double b0, double b1, double b2) {
+				double b0, double b1, double b2) {
         m_a0 = a0;
         m_a1 = a1 / a0;
         m_a2 = a2 / a0;

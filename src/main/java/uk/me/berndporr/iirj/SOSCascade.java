@@ -15,7 +15,7 @@
  * limitations under the License.
  * 
  *  Copyright (c) 2009 by Vinnie Falco
- *  Copyright (c) 2016 by Bernd Porr
+ *  Copyright (c) 2021 by Bernd Porr
  */
 
 
@@ -25,22 +25,38 @@ import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexUtils;
 
 /**
- *         User facing class which contains all the methods the user uses
- *         to create Custom filters. This done in this way:
- *         Custom butterworth = new SOSCascade(); 
- *         Then call one of the methods below to 
- *         provide the coefficients.
+ *         User facing class which contains two methods
+ *         to create Custom SOS filters. This is done in this way:
+ *         SOSCascade sosCascase = new SOSCascade(); 
+ *         Then call one of the setup() methods below to 
+ *         set the SOS coefficients.
  */
 public class SOSCascade extends Cascade {
 
-	public void setup(int order,
-			   double[][] sosCoefficients,
-			   int directFormType) {
-		setSOScoeff(order,sosCoefficients,directFormType);
+	/**
+	 * Sets directly the coefficients of the chain of
+	 * 2nd order filters. The layout of the array is
+	 * excatly how the scipy python design functions
+	 * output the sos coeffcients: b0,b1,b2,a0,a1,a2.
+	 * The filter type can be either DirectFormAbstract.DIRECT_FORM_II
+	 * or DirectFormAbstract.DIRECT_FORM_I.
+	 * @param sosCoefficients SOS coefficients
+	 * @param directFormType Direct form type (I or II).
+	 **/
+	public void setup(final double[][] sosCoefficients,
+			  final int directFormType) {
+		setSOScoeff(sosCoefficients,directFormType);
 	}
 
-	public void setup(int order,
-			  double[][] sosCoefficients) {
-		setSOScoeff(order,sosCoefficients,DirectFormAbstract.DIRECT_FORM_II);
+	/**
+	 * Sets directly the coefficients of the chain of
+	 * 2nd order filters. The layout of the array is
+	 * excatly how the scipy python design functions
+	 * output the coeffcients: b0,b1,b2,a0,a1,a2.
+	 * The filter type is DIRECT_FORM_II.
+	 * @param sosCoefficients SOS coefficients
+	 **/
+	public void setup(final double[][] sosCoefficients) {
+		setSOScoeff(sosCoefficients,DirectFormAbstract.DIRECT_FORM_II);
 	}
 }
