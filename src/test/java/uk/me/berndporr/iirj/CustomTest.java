@@ -30,7 +30,7 @@ import org.junit.Test;
 // if the custom parameters are properly transmitted.
 public class CustomTest {
 
-	static String prefix="target/surefire-reports/butterworth/";
+	static String prefix="target/surefire-reports/custom/";
 
 	final double[][] coeff1 =
 	{{ 0.02008337,  0.04016673,  0.02008337,
@@ -109,6 +109,31 @@ public class CustomTest {
 			Assert.assertEquals(cust.filter(v),result2[i++],delta);
 		}
 		
+	}
+
+	@Test
+	public void lowPassTest() throws Exception {
+		SOSCascade cust = new SOSCascade();
+		cust.setup(coeff2);
+
+		File dir = new File(prefix);
+		dir.mkdirs();
+		FileOutputStream os = new FileOutputStream(prefix+"lp.txt");
+		PrintStream bp = new PrintStream(os);
+
+		// let's do an impulse response
+		for (int i = 0; i < 500; i++) {
+			double v = 0;
+			if (i == 10)
+				v = 1;
+			v = cust.filter(v);
+			bp.println("" + v);
+		}
+		Assert.assertTrue(Math.abs(cust.filter(0))<1E-30);
+		Assert.assertTrue(Math.abs(cust.filter(0))!=0.0);
+		Assert.assertTrue(Math.abs(cust.filter(0))!=Double.NaN);
+
+		os.close();
 	}
 
 }
