@@ -40,7 +40,8 @@ public class SOSCascade extends Cascade {
 	 * Sets directly the coefficients of the chain of
 	 * 2nd order filters. The layout of the array is
 	 * excatly how the scipy python design functions
-	 * output the sos coeffcients: b0,b1,b2,a0,a1,a2.
+	 * output the sos coeffcients: 
+         * [b0,b1,b2,a0,a1,a2],[b0,b1,b2,a0,a1,a2],...
 	 * The filter type can be either DirectFormAbstract.DIRECT_FORM_II
 	 * or DirectFormAbstract.DIRECT_FORM_I.
 	 * @param sosCoefficients SOS coefficients
@@ -55,7 +56,8 @@ public class SOSCascade extends Cascade {
 	 * Sets directly the coefficients of the chain of
 	 * 2nd order filters. The layout of the array is
 	 * excatly how the scipy python design functions
-	 * output the coeffcients: b0,b1,b2,a0,a1,a2.
+	 * output the coeffcients:
+         * [b0,b1,b2,a0,a1,a2],[b0,b1,b2,a0,a1,a2],...
 	 * The filter type is DIRECT_FORM_II.
 	 * @param sosCoefficients SOS coefficients
 	 **/
