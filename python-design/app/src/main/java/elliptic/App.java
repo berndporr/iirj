@@ -7,6 +7,25 @@ import uk.me.berndporr.iirj.*;
 import java.io.*;
 
 public class App {
+
+	/**
+	 * elliptic_design.py:
+	 *
+	 * from scipy import signal
+	 * # sampling rate
+	 * fs = 1000
+	 * # cutoff
+	 * f0 = 100
+	 * # order
+	 * order = 4
+	 * # passband ripple
+	 * pr = 5
+	 * # minimum stopband rejection
+	 * sr = 40
+	 * coeff = signal.ellip(order, pr, sr, f0/fs*2, 'low', output='sos')
+	 * 
+	 * The contents of coeff have been copied into coeff2 below.
+	 **/
 	
 	final double[][] coeff2 =
 	{
@@ -24,29 +43,32 @@ public class App {
 		 9.538687377533192624e-01}
 	};
 
-    public void calcImpulse() {
-	    try {
-		    FileOutputStream os = new FileOutputStream("elliptic.dat");
-		    SOSCascade cust = new SOSCascade();
-		    cust.setup(coeff2);
-		    PrintStream bp = new PrintStream(os);
-		    // let's do an impulse response
-		    for (int i = 0; i < 500; i++) {
-			    double v = 0;
-			    if (i == 10)
-				    v = 1;
-			    v = cust.filter(v);
-			    bp.println("" + v);
-		    }
-		    os.close();
-	    } catch (FileNotFoundException e) {
-		    e.printStackTrace();
-	    } catch (IOException e){
-		    e.printStackTrace();
-	    }
-    }
-
-    public static void main(String[] args) {
-	    new App().calcImpulse();
-    }
+	/**
+	 * Calculates the impulse response of the filter and writes it to elliptic.dat.
+	 **/
+	public void calcImpulse() {
+		try {
+			FileOutputStream os = new FileOutputStream("elliptic.dat");
+			SOSCascade cust = new SOSCascade();
+			cust.setup(coeff2);
+			PrintStream bp = new PrintStream(os);
+			// let's do an impulse response
+			for (int i = 0; i < 500; i++) {
+				double v = 0;
+				if (i == 10)
+					v = 1;
+				v = cust.filter(v);
+				bp.println("" + v);
+			}
+			os.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		new App().calcImpulse();
+	}
 }
