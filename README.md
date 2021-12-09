@@ -5,9 +5,9 @@ An IIR filter library written in JAVA.
 Highpass, lowpass, bandpass and bandstop as
 Butterworth, Bessel and Chebyshev Type I/II.
 
-You can also provide your own filter coefficients, for example calculated by
-scipy and then create your custom IIR filter with the `SOSCascade` class.
-See the `elliptic` subdirectory for a demo.
+You can also calculate the filter coefficients with Python's
+scipy and then create your custom IIR filter.
+See the `elliptic-demo` subdirectory.
 
 It's based on the IIR1 library [https://github.com/berndporr/iir1]
 which in turn is based on Vinnie Falco's DSPFilters [https://github.com/vinniefalco/DSPFilters].
