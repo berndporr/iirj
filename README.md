@@ -7,7 +7,7 @@ Butterworth, Bessel and Chebyshev Type I/II.
 
 You can also calculate the filter coefficients with Python's
 scipy and then create your custom IIR filter.
-See the `elliptic-demo` subdirectory.
+See the `python-design` subdirectory.
 
 It's based on the IIR1 library [https://github.com/berndporr/iir1]
 which in turn is based on Vinnie Falco's DSPFilters [https://github.com/vinniefalco/DSPFilters].
