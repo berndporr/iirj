@@ -23,7 +23,7 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1.1-jre'
 
-    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.4'
+    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.5'
 }
 
 application {
