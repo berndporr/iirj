@@ -52,21 +52,24 @@ for all filter types. Run them with `mvn test`. These test programs
 write the different impulse responses of the filters to text files.
 
 ## Installation
-Just run: `mvn install` to add it to your local maven respository or
-just point your project to Maven Central:
+
+## Local install
+ - Clone this repository
+ - Run `mvn install` to add it to your local maven respository
 
 ## Maven central
 
-Click on 
-[![Maven Central](https://img.shields.io/maven-central/v/uk.me.berndporr/iirj.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22uk.me.berndporr%22%20AND%20a:%22iirj%22)
-to get the latest version.
+At [![Maven Central](https://img.shields.io/maven-central/v/uk.me.berndporr/iirj.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22uk.me.berndporr%22%20AND%20a:%22iirj%22)
+click on the iirj version number and then choose the appropriate installation option, for
+example for Android studio.
 
 ## Android Studio
 ```
 dependencies {
-    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.4'
+    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.5'
 }
 ```
+Android studio will automatically notify you if a new IIR library is available.
 
 ## Documentation
 * Online: https://berndporr.github.io/iirj/
