@@ -3,7 +3,7 @@
 An IIR filter library written in JAVA.
 
 Highpass, lowpass, bandpass and bandstop as
-Butterworth, Bessel and Chebyshev Type I/II.
+Butterworth and Chebyshev Type I/II.
 
 You can also calculate the filter coefficients with Python's
 scipy and then create your custom IIR filter.
@@ -66,7 +66,7 @@ example for Android studio.
 ## Android Studio
 ```
 dependencies {
-    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.5'
+    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.6'
 }
 ```
 Android studio will automatically notify you if a new IIR library is available.
