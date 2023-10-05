@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <name>${project.groupId}:${project.artifactId}</name>
-  <description>A selection of standard IIR filters such as Butterworth, Bessel and Chebyshev which
+  <description>A selection of standard IIR filters such as Butterworth and Chebyshev which
   are set up with a single command and then can be used for realtime processing: outsample = filter(insample).
   </description>
   <url>https://github.com/berndporr/iirj</url>
