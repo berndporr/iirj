@@ -35,7 +35,7 @@ def plot_if(figno,name,figtitle):
     plt.ylabel("delay/secs")
 
 if len(sys.argv) < 2:
-    print("Specify which filter shall be plotted: bessel, butterworth, chebyshevI, chebyshevII.")
+    print("Specify which filter shall be plotted: butterworth, chebyshevI, chebyshevII.")
     quit()
     
 prefix = "target/surefire-reports/"+sys.argv[1]+"/"
