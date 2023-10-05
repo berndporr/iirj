@@ -16,13 +16,13 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class IIRJScipyCompare
+public class CompareWithScipyTest
 {
 	private final FilterType  filterType;
 	private final FilterBType filterBType;
 	private final int         order;
 
-	public IIRJScipyCompare(FilterType filterType, FilterBType filterBType, int order) {
+	public CompareWithScipyTest(FilterType filterType, FilterBType filterBType, int order) {
 		this.filterType = filterType;
 		this.filterBType = filterBType;
 		this.order = order;
@@ -105,6 +105,7 @@ public class IIRJScipyCompare
 	}
 
 	private Cascade createIIRJFilter(FilterType filterType, FilterBType filterBType, int order, double lc, double hc, double sampleRate) {
+		System.out.println("Scipy test: "+filterType+", "+filterBType+", "+order+", "+lc+", "+hc+", fs="+sampleRate);
 		double centerFrequency = (hc + lc) / 2;
 		double widthFrequency = hc - lc;
 		double rippleInDb = 1;
