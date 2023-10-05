@@ -99,8 +99,8 @@ public class Biquad {
         double a0 = 1;
         double a1 = -pole.getReal();
         double a2 = 0;
-        double b0 = -zero.getReal();
-        double b1 = 1;
+        double b0 = 1;
+        double b1 = -zero.getReal();
         double b2 = 0;
         setCoefficients(a0, a1, a2, b0, b1, b2);
     }
