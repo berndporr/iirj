@@ -28,7 +28,7 @@ import org.apache.commons.math3.complex.Complex;
  * call one of the methods below to create low-,high-,band-, or stopband
  * filters. For example: bessel.bandPass(2,250,50,5);
  *
- * The implementation is based on fixed poles for order 1-25 calculated with Scipy 1.7.3
+ * The implementation is based on fixed poles for order 1 to 24 calculated with Scipy 1.7.3
  */
 public class Bessel extends Cascade
 {
