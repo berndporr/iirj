@@ -55,7 +55,8 @@ public class CompareWithScipyTest
 	{
 		Butterworth("Butterworth"),
 		Chebychev1("Chebychev1"),
-		Chebychev2("Chebychev2");
+		Chebychev2("Chebychev2"),
+		Bessel("Bessel");
 
 		private final String scipyString;
 
@@ -163,6 +164,23 @@ public class CompareWithScipyTest
 						break;
 				}
 				return chebyshevII;
+			case Bessel:
+				Bessel bessel = new Bessel();
+				switch (filterBType) {
+					case Lowpass:
+						bessel.lowPass(order, sampleRate, hc);
+						break;
+					case Highpass:
+						bessel.highPass(order, sampleRate, lc);
+						break;
+					case Bandpass:
+						bessel.bandPass(order, sampleRate, centerFrequency, widthFrequency);
+						break;
+					case Bandstop:
+						bessel.bandStop(order, sampleRate, centerFrequency, widthFrequency);
+						break;
+				}
+				return bessel;
 		}
 
 		throw new IllegalArgumentException(

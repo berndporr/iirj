@@ -3,7 +3,7 @@
 An IIR filter library written in JAVA.
 
 Highpass, lowpass, bandpass and bandstop as
-Butterworth and Chebyshev Type I/II.
+Butterworth, Bessel and Chebyshev Type I/II.
 
 You can also calculate the filter coefficients with Python's
 scipy and then create your custom IIR filter.
@@ -85,7 +85,7 @@ To see the impulse and frequency responses run:
 ```
 python3 ./plot_impulse_fresponse.py <filter>
 ```
-where is <filter> is butterworth, chebyshevI or chebyshevII.
+where is <filter> is butterworth, bessel, chebyshevI or chebyshevII.
 
 The script DetectorTest uses a bandpass filter to detect the
 heartbeats of an ECG recording faking a matched filter which could
