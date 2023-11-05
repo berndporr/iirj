@@ -140,6 +140,18 @@ public class ParameterChecksTest {
 		}
 	}
 
+	@Test
+	public void bessorderOutOfRange() throws Exception {
+		final int orderTooHigh = Bessel.MAX_ORDER+1;
+		try {
+			Bessel bessel = new Bessel();
+			bessel.lowPass(orderTooHigh, 250, 50);
+			Assert.fail("Exception not generated for out of range order.");
+		} catch (Exception e) {
+			System.out.println("Bessel exception for order at "+orderTooHigh+": "+e.getMessage());
+		}
+	}
+
 	public void main(String args[]) {
 		try {
 			correctFsTest();

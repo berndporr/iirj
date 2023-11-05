@@ -229,6 +229,11 @@ public class Bessel extends Cascade
 	}
 
 	/**
+	 * Maximum order
+	 */
+	final public static int MAX_ORDER = 24;
+
+	/**
 	 * These poles are calculated with Scipy version 1.7.3
 	 **/
 	public Complex[] getPoles(int N) {
