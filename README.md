@@ -66,7 +66,7 @@ example for Android studio.
 ## Android Studio
 ```
 dependencies {
-    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.6'
+    implementation group: 'uk.me.berndporr', name:'iirj', version: '1.7'
 }
 ```
 Android studio will automatically notify you if a new IIR library is available.
